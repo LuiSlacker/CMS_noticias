@@ -11,7 +11,7 @@
   "rules": {
     "indent": ["error", 2],
     "prefer-arrow-callback": ["error", { "allowNamedFunctions": true }],
-    "comma-dangle": 0,
+
     "array-callback-return": 0,
     "consistent-return": 0,
     "import/newline-after-import": 0,
