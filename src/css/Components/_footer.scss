@@ -1,0 +1,40 @@
+footer {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  background: #333;
+  color: $grey;
+  position: fixed;
+  bottom:0px !important;
+  
+  ul {
+      flex: 1 1 50%;
+      padding-left: 6em;
+      li {
+          display: inline;
+          color: #6A6D7C;
+          margin-right: 15px;
+          border-right: 1px $link solid;
+          padding: 0 12px 0 0;
+          a {
+              text-decoration: none;
+          }
+      }
+      
+      :last-child {
+          border: none;
+      }
+  }
+  
+  a {
+      color: $grey;
+      text-decoration: none;
+  }
+  
+  p {
+      flex: 1 1 50%;
+      margin-right: 6em;
+      text-align: right;
+  }
+}

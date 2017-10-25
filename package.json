@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -21,14 +22,27 @@
     "compression": "^1.7.1",
     "express": "^4.16.2",
     "mongoose": "^4.12.4",
+    "passport": "^0.4.0",
     "winston": "^2.4.0",
     "winston-daily-rotate-file": "^1.7.2",
     "winston-slack-hook": "^0.3.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.7",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "nodemon": "^1.12.1"
+    "extract-text-webpack-plugin": "^3.0.2",
+    "jsx-loader": "^0.13.2",
+    "node-sass": "^4.5.3",
+    "nodemon": "^1.12.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-hot-loader": "^3.1.1",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0"
   }
 }

@@ -1,0 +1,38 @@
+header {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  background: #333;
+  color: $grey;
+  position: fixed;
+  top:0px !important;
+  z-index:10;
+
+  ul {
+    flex: 1 1 50%;
+    right: 0px;
+    margin-top: 10px;
+    li {
+        display: inline;
+        color: #6A6D7C;
+        margin-right: 15px;
+        border-right: 1px $link solid;
+        padding: 0 12px 0 0;
+        font-size: 120%;
+        a, a:visited {
+            text-decoration: none;
+            color: #E2E2E4;
+        }
+    }
+    
+    :last-child {
+        border: none;
+    }
+}
+}
+
+.resetH3 {
+    margin: 10px 0 0 15px;
+}

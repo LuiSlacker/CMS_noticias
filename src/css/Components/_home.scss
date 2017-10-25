@@ -1,0 +1,21 @@
+.post-list {
+  overflow-y: scroll;
+  height: 48em;
+  position: relative;
+}
+
+.top-commented-posts {
+  overflow-y: scroll;
+  height: 24em;
+  position: relative;
+}
+
+.latest-comments {
+  overflow-y: scroll;
+  height: 21em;
+  position: relative;
+}
+
+.panel {
+  box-shadow: -1px 1px 20px 3px rgba(0, 0, 0, 0.2)
+}
