@@ -1,0 +1,15 @@
+# CMS Noticias
+
+## Setup
+
+Install all dependencies and run the server with
+```
+npm install && npm start
+```
+
+
+## Team
+
+* Mateo Daza
+* Sebastian Racedo
+* Ludwig Goohsen

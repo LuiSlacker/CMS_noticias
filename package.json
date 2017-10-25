@@ -20,6 +20,7 @@
   "dependencies": {
     "compression": "^1.7.1",
     "express": "^4.16.2",
+    "mongoose": "^4.12.4",
     "winston": "^2.4.0",
     "winston-daily-rotate-file": "^1.7.2",
     "winston-slack-hook": "^0.3.0"
