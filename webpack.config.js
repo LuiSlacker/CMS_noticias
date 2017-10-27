@@ -11,10 +11,10 @@ module.exports = {
     devtool: 'source-map',
     module: {
         loaders: [
-            { 
-                test: /\.jsx$/, 
-                loaders: ['react-hot', 'jsx', 'babel'], 
-                exclude: /node_modules/ 
+            {
+                test: /\.jsx$/,
+                loaders: ['babel-loader'],
+                exclude: /node_modules/
             },
             {
                 test: /\.scss$/,
