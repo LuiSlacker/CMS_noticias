@@ -3,7 +3,7 @@ npm-debug.log
 
 .idea
 
-config/config
+config/config.js
 dist
 public/js
 logs
