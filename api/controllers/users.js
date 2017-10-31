@@ -1,7 +1,7 @@
 'use strict';
 
 const User = require('./../models/users');
-const config = require('../../../config/config');
+const config = require('../../config/config');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const saltRounds = 10;

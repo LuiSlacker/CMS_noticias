@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router();
-const controller = require('./../controllers/users');
+const controller = require('../controllers/users');
 
 router.param('id', controller.params);
 

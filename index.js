@@ -1,10 +1,9 @@
 'use strict';
 
 const express = require('express');
+const app = express();
 const mongoose = require('mongoose');
 const config = require('./config/config');
-
-const app = module.exports = express();
 
 // Database connection
 mongoose.connect(`mongodb://${config.mongoDB.username}:${config.mongoDB.password}@${config.mongoDB.host}/${config.mongoDB.name}`);
@@ -18,10 +17,8 @@ app.use(compression());
 // serve static content only from 'public' dir
 app.use(express.static('./public'));
 
-// expose routes for templates
-app.use('/', (req, res, next) => {
-  res.send('CMS Noticias');
-});
+// expose api
+app.use('/api', require('./api'));
 
 // global errorHandler ============================================
 require('./errorHandler/ErrorHandler')(app);
@@ -30,3 +27,5 @@ require('./errorHandler/ErrorHandler')(app);
 const server = app.listen(process.env.PORT || 4001, () => {
   log.info(`server started, listening on port: ${server.address().port}`);
 });
+
+module.exports = app;
