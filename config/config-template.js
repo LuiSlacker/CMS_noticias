@@ -4,8 +4,8 @@ module.exports = {
   mongoDB: {
     host: 'ds231715.mlab.com:31715',
     name: 'cms_noticias',
-    username: 'admin',
-    password: 'admin',
+    username: '<the username goes here>',
+    password: '<the password goes here>',
   },
   logs: {
     dir: '/logs',

@@ -1,10 +1,14 @@
 'use strict';
 
 const express = require('express');
-const app = module.exports = express();
-const db = require('./config/index'); // Database connection
-
+const mongoose = require('mongoose');
 const config = require('./config/config');
+
+const app = module.exports = express();
+
+// Database connection
+mongoose.connect(`mongodb://${config.mongoDB.username}:${config.mongoDB.password}@${config.mongoDB.host}/${config.mongoDB.name}`);
+
 const compression = require('compression');
 const log = require('./lib/logger');
 
@@ -13,6 +17,7 @@ app.use(compression());
 
 // serve static content only from 'public' dir
 app.use(express.static('./public'));
+
 // expose routes for templates
 app.use('/', (req, res, next) => {
   res.send('CMS Noticias');

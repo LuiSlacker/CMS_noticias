@@ -1,6 +1,9 @@
 node_modules
-dist
-
 npm-debug.log
 
-config/secrets.js
+.idea
+
+config/config
+dist
+public/js
+logs
