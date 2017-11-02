@@ -9,6 +9,10 @@ const config = require('./config/config');
 mongoose.connect(`mongodb://${config.mongoDB.username}:${config.mongoDB.password}@${config.mongoDB.host}/${config.mongoDB.name}`);
 
 const compression = require('compression');
+
+// parse request body
+app.use(express.json());
+
 const log = require('./lib/logger');
 
 // compress all assets and json-responses if minimal size is reached

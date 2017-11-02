@@ -50,8 +50,7 @@ exports.all = (req, res, next) => {
 
 
 exports.post = (req, res, next) => {
-  const body = req.body;
-  const user = new User(body);
+  const user = new User(req.body);
   const password = bcrypt.hashSync(user.password, saltRounds);
   user.password = password;
 
@@ -62,10 +61,8 @@ exports.post = (req, res, next) => {
 };
 
 exports.get = (req, res, next) => {
-  const user = req.user;
-  res.json(user);
+  res.json(req.user);
 };
-
 
 exports.logout = (req, res, next) => {
 };
