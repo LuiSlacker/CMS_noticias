@@ -9,6 +9,15 @@ const PaginaModel = new Schema({
     required: true,
     unique: true,
   },
+  poll: {
+    required: false,
+    question: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    options: [{ type: String }],
+  },
 }, {
   timestamps: true,
 });

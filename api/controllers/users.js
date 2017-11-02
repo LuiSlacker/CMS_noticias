@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require('./../models/users');
+const User = require('../models/user');
 const config = require('../../config/config');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');

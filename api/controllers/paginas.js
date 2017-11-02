@@ -4,7 +4,7 @@ const Boom = require('boom');
 const Utils = require('../Utils');
 
 // MongoDB models  ========================
-const Pagina = require('../models/paginas');
+const Pagina = require('../models/pagina');
 
 exports.params = (req, res, next, id) => {
   if (!Utils.isValidObjectId(id)) return next(Boom.notFound(`pagina with id: ${id} does not exist!`));
