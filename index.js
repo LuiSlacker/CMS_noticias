@@ -3,10 +3,16 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const bluebird = require('bluebird');
 const config = require('./config/config');
 
+mongoose.Promise = require('bluebird');
+
 // Database connection
-mongoose.connect(`mongodb://${config.mongoDB.username}:${config.mongoDB.password}@${config.mongoDB.host}/${config.mongoDB.name}`);
+mongoose.connect(`mongodb://${config.mongoDB.username}:${config.mongoDB.password}@${config.mongoDB.host}/${config.mongoDB.name}`, {
+  useMongoClient: true,
+  promiseLibrary: bluebird,
+});
 
 const compression = require('compression');
 

@@ -14,10 +14,12 @@ const PaginaModel = new Schema({
     question: {
       type: String,
       required: true,
-      unique: true,
     },
     options: [{ type: String }],
   },
+  notices: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'Notice' },
+  ],
 }, {
   timestamps: true,
 });

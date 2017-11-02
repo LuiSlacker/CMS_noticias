@@ -20,7 +20,7 @@
   "homepage": "https://github.com/LuiSlacker/CMS_noticias#readme",
   "dependencies": {
     "bcrypt": "^1.0.3",
-    "body-parser": "^1.18.2",
+    "bluebird": "^3.5.1",
     "compression": "^1.7.1",
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.0",
