@@ -1,6 +1,7 @@
 'use strict';
 
-const paginasRouter = require('express').Router();
+const express = require('express');
+const paginasRouter = express.Router({ mergeParams: true });
 const controller = require('../controllers/paginas');
 
 paginasRouter.param('id', controller.params);
@@ -14,4 +15,8 @@ paginasRouter.route('/:id')
   .put(controller.put)
   .delete(controller.delete);
 
+// include notices subrouter
+paginasRouter.use('/:id/notices', require('./notices'));
+
 module.exports = paginasRouter;
+

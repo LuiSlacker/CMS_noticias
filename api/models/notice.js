@@ -14,8 +14,8 @@ const NoticeModel = new Schema({
   },
   imageUrl: {
     type: String,
-    required: true,
   },
+  likes: Number,
 }, {
   timestamps: true,
 });

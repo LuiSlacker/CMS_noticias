@@ -13,7 +13,6 @@ const PaginaModel = new Schema({
     required: false,
     question: {
       type: String,
-      required: true,
     },
     options: [{ type: String }],
   },
