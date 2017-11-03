@@ -16,11 +16,9 @@ const PaginaModel = new Schema({
     },
     options: [{ type: String }],
   },
-  notices: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'Notice' },
-  ],
+  notices: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notice' }],
 }, {
   timestamps: true,
 });
 
-module.exports = mongoose.model('Paginas', PaginaModel);
+module.exports = mongoose.model('Pagina', PaginaModel);

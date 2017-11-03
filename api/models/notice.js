@@ -16,6 +16,7 @@ const NoticeModel = new Schema({
     type: String,
   },
   likes: Number,
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 }, {
   timestamps: true,
 });
