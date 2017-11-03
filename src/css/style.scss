@@ -7,15 +7,23 @@ $grey: #f3f5f8;
 $link: #6A6D7C;
 $green: #3dc9b3;
 
-@import 'Components/nav';
-@import 'Components/header';
-@import 'Components/footer';
-@import 'Components/main';
-@import 'Components/home';
-@import 'Components/post';
-@import 'Components/profile';
+//@import 'Components/nav';
+//@import 'Components/header';
+//@import 'Components/footer';
+// @import 'Components/main';
+// @import 'Components/home';
+// @import 'Components/post';
+// @import 'Components/profile';
 
-body{
-    @extend .reset;
+// body{
+//     @extend .reset;
+// }
+
+article {
+  padding-top: 1em;
 }
 
+.card-text {
+  text-decoration: none;
+  color: black;
+}

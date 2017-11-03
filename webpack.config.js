@@ -6,7 +6,7 @@ module.exports = {
         filename:'./src/js/app.jsx'
     },
     output: {
-        filename: './public/js/app.js'
+        filename: './public/js/bundle.js'
     },
     devtool: 'source-map',
     module: {
@@ -23,7 +23,7 @@ module.exports = {
         ]
        },
     plugins: [
-        new CleanWebpackPlugin(['./public'], {
+        new CleanWebpackPlugin(['./public/js'], {
           exclude: ['index.html']
         })
     ],
