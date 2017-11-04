@@ -7,9 +7,20 @@ import {
   withRouter
 } from 'react-router-dom';
 
+import * as NoticeService from '../../services/notices-service';
+
 class Home extends React.Component {
 	constructor() {
     super();
+
+    this.state =  {
+      notices: [],
+    }
+  }
+
+  componentDidMount() {
+    NoticeService.getAllForOnePage('59fb6132126e1c1d13c1df25')
+      .then(notices => this.setState({ notices }))
   }
 
 	render() {

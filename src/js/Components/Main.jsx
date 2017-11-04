@@ -8,11 +8,11 @@ import {
   withRouter
 } from 'react-router-dom';
 
-import Header from './Layout/Nav.jsx';
-import Footer from './Layout/Footer.jsx';
-import SingleNotice from './Pages/SingleNotice.jsx';
+import Header from './layout/Nav.jsx';
+import Footer from './layout/Footer.jsx';
+import SingleNotice from './pages/SingleNotice.jsx';
 
-import Home from './Pages/Home.jsx';
+import Home from './pages/Home.jsx';
 
 
 class Main extends React.Component {
