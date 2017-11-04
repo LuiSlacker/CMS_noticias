@@ -1,21 +1,8 @@
-.post-list {
-  overflow-y: scroll;
-  height: 48em;
-  position: relative;
+.card:hover {
+  box-shadow: 4px 5px 5px #888888;
+  transition:  .2s;
 }
 
-.top-commented-posts {
-  overflow-y: scroll;
-  height: 24em;
-  position: relative;
-}
-
-.latest-comments {
-  overflow-y: scroll;
-  height: 21em;
-  position: relative;
-}
-
-.panel {
-  box-shadow: -1px 1px 20px 3px rgba(0, 0, 0, 0.2)
+.nav-tabs {
+  margin-bottom: 1rem;
 }

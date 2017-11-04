@@ -8,100 +8,82 @@ import {
 } from 'react-router-dom';
 
 import * as NoticeService from '../../services/notices-service';
+import * as PagesService from '../../services/pages-service';
+
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 
 class Home extends React.Component {
 	constructor() {
     super();
 
     this.state =  {
+      pages: [],
       notices: [],
     }
+
+    this.toggle = this.toggle.bind(this);
   }
 
   componentDidMount() {
-    NoticeService.getAllForOnePage('59fb6132126e1c1d13c1df25')
-      .then(notices => this.setState({ notices }))
+    PagesService.getAll()
+      .then(pages => {
+        NoticeService.getAllForOnePage(pages[0]._id)
+        .then(notices => this.setState({
+          pages,
+          notices,
+          activePage: pages[0]._id,
+        }));
+      });
+  }
+
+  toggle(activePage) {
+    if (this.state.activePage !== activePage) {
+      NoticeService.getAllForOnePage(activePage)
+        .then(notices => this.setState({ notices, activePage }));
+    }
   }
 
 	render() {
 		return (
       <article>
         <div>
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="index.html">Home</a>
-            </li>
-            <li className="breadcrumb-item active">About</li>
-          </ol>
+          <Nav tabs>
+            {this.state.pages.map((page, index) =>
+              <NavItem key={index}>
+                <NavLink
+                  className={this.state.activePage === page._id ? 'active': '' }
+                  onClick={() => { this.toggle(page._id); }}
+                >
+                {page.name}
+                </NavLink>
+              </NavItem>
+            )}
+          </Nav>
 
-          <div className="row">
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-              <Link className="nav-link reset" to='/noticia'>
-                <div className="card h-100">
-                  <img className="card-img-top" src="http://placehold.it/700x400" alt="" />
-                  <div className="card-body">
-                    <h4 className="card-title">Project One</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-              <div className="card h-100">
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt="" /></a>
-                <div className="card-body">
-                  <h4 className="card-title">
-                    <a href="#">Project Two</a>
-                  </h4>
-                  <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-              <div className="card h-100">
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt="" /></a>
-                <div className="card-body">
-                  <h4 className="card-title">
-                    <a href="#">Project Three</a>
-                  </h4>
-                  <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-              <div className="card h-100">
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt="" /></a>
-                <div className="card-body">
-                  <h4 className="card-title">
-                    <a href="#">Project Four</a>
-                  </h4>
-                  <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-              <div className="card h-100">
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt="" /></a>
-                <div className="card-body">
-                  <h4 className="card-title">
-                    <a href="#">Project Five</a>
-                  </h4>
-                  <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-              <div className="card h-100">
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt="" /></a>
-                <div className="card-body">
-                  <h4 className="card-title">
-                    <a href="#">Project Six</a>
-                  </h4>
-                  <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <TabContent activeTab={this.state.activePage}>
+            {this.state.pages.map((page, index) =>
+              <TabPane key={index} tabId={page._id}>
+                <Row>
+                  {this.state.notices.length > 0
+                  ? this.state.notices.map((notice, index) =>
+                      <div key={index} className="col-lg-4 col-sm-6 portfolio-item">
+                        <Link className="nav-link reset" to={`paginas/${this.state.activePage}/noticias/${notice._id}`}>
+                          <div className="card h-100">
+                            <img className="card-img-top" src={notice.imageUrl} alt="Noticia Image" />
+                            <div className="card-body">
+                              <h4 className="card-title">{notice.title}</h4>
+                              <p className="card-text">{notice.text}</p>
+                            </div>
+                          </div>
+                        </Link>
+                      </div>)
+                  : <div>This Page does not include noticias!</div>}
+                </Row>
+              </TabPane>
+            )}
+          </TabContent>
+
+
         </div>
       </article>);
 	}

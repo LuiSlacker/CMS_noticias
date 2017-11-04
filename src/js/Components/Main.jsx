@@ -24,7 +24,7 @@ class Main extends React.Component {
 				<div className='container'>
 					<Route path="/" exact component={Home}/>
 
-          <Route path="/noticia" component={SingleNotice}/>
+          <Route path="/paginas/:pageUid/noticias/:noticeUid" component={SingleNotice}/>
 				</div>
 			</div>
 		</Router>

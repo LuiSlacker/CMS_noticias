@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-
 export function getAllForOnePage(pageId) {
-  return axios.get(`/api/paginas/${pageId}`)
+  return axios.get(`/api/paginas/${pageId}/notices`)
     .then(response => {
-      console.log('asd')
-      return response.data;
-    });
+      return response.data
+    })
+    .catch(console.error);
 };
 
-export const getOneById = (pageId) => axios.get(`/api/paginas/${pageId}`);
+export function getOneById(pageId, noticesId) {
+  return axios.get(`/api/paginas/${pageId}/notices/${noticesId}`)
+    .then(response => response.data);
+};

@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require('mongoose');
 const bluebird = require('bluebird');
 const config = require('./config/config');
+const path = require('path');
 
 mongoose.Promise = require('bluebird');
 
@@ -30,6 +31,9 @@ app.use(express.static('./public'));
 // expose api
 app.use('/api', require('./api'));
 
+app.get('*', (request, response) => {
+  response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
 // global errorHandler ============================================
 require('./errorHandler/ErrorHandler')(app);
 
