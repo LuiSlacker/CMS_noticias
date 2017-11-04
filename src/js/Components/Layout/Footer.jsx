@@ -7,9 +7,9 @@ class Footer extends React.Component {
 
 	render() {
 		return (
-      <footer className="py-5 bg-dark">
-        <div className="container">
-          <p className="m-0 text-center text-white">Copyright &copy; 2017  - CMS Noticias </p>
+      <footer className="py-1 bg-dark">
+        <div className="footer-container">
+          <p className="m-0 text-center text-white">Copyright &copy; 2017 - UniNorte - CMS Noticias </p>
         </div>
       </footer>);
 	}

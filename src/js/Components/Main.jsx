@@ -21,7 +21,7 @@ class Main extends React.Component {
 		<Router>
 			<div>
         <Header />
-				<div className='container'>
+				<div className='container main-container'>
 					<Route path="/" exact component={Home}/>
 
           <Route path="/paginas/:pageUid/noticias/:noticeUid" component={SingleNotice}/>
