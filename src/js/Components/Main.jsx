@@ -10,9 +10,10 @@ import {
 
 import Header from './layout/Nav.jsx';
 import Footer from './layout/Footer.jsx';
-import SingleNotice from './pages/SingleNotice.jsx';
 
 import Home from './pages/Home.jsx';
+import SingleNotice from './pages/SingleNotice.jsx';
+import Admin from './pages/Admin.jsx';
 
 
 class Main extends React.Component {
@@ -23,6 +24,7 @@ class Main extends React.Component {
         <Header />
 				<div className='container main-container'>
 					<Route path="/" exact component={Home}/>
+          <Route path="/admin" exact component={Admin}/>
 
           <Route path="/paginas/:pageUid/noticias/:noticeUid" component={SingleNotice}/>
 				</div>

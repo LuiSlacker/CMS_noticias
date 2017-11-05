@@ -82,8 +82,6 @@ class Home extends React.Component {
               </TabPane>
             )}
           </TabContent>
-
-
         </div>
       </article>);
 	}
