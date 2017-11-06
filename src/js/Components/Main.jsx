@@ -15,7 +15,7 @@ import Home from './pages/Home.jsx';
 import SingleNotice from './pages/SingleNotice.jsx';
 import Admin from './pages/Admin.jsx';
 import Dashboard from './pages/Dashboard.jsx';
-
+import { NotificationContainer } from 'react-notifications';
 
 class Main extends React.Component {
 	render() {
@@ -34,6 +34,7 @@ class Main extends React.Component {
 		</Router>
 
     <Footer />
+    <NotificationContainer />
 		</main>);
 	}
 }

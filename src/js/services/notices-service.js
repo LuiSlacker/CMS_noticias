@@ -16,5 +16,4 @@ export function getOneById(pageId, noticesId) {
 export function persistOne(pageId, noticiaObject) {
   return axios.post(`/api/paginas/${pageId}/notices`, noticiaObject)
     .then(response => response.data)
-    .catch(console.error);
 };

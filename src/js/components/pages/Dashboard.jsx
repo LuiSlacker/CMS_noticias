@@ -9,7 +9,7 @@ import {
 import * as PagesService from '../../services/pages-service';
 import * as NoticesService from '../../services/notices-service';
 import { Form, FormGroup, Label, Input, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
-
+import { NotificationManager } from 'react-notifications';
 
 class Dashboard extends React.Component {
 	constructor() {
@@ -58,12 +58,15 @@ class Dashboard extends React.Component {
       text: this.state.noticiaText,
       imageUrl: this.state.imageUrl
     }).then(() => {
+      NotificationManager.success('Noticia guardado con éxito', 'Exito')
       this.setState({
         noticiaTitle: '',
         noticiaText: '',
         imageUrl:'',
         selectedPageId: '',
       })
+    }).catch(err =>  {
+      NotificationManager.error(err.response.data.Error.message, 'Error al guardar')
     });
   }
 
