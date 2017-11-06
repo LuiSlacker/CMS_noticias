@@ -23,12 +23,12 @@ class Nav extends React.Component {
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link className="nav-link" to='/noticia'>Noticia</Link>
+              <Link className="nav-link" to='/admin'>Admin</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="services.html">Services</a>
+            <Link className="nav-link" to='/dashboard'>Dashboard</Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link" href="contact.html">Contact</a>
             </li>
             <li className="nav-item dropdown">
@@ -64,7 +64,7 @@ class Nav extends React.Component {
                 <a className="dropdown-item" href="404.html">404</a>
                 <a className="dropdown-item" href="pricing.html">Pricing Table</a>
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

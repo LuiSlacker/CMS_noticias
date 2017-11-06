@@ -24,7 +24,7 @@ module.exports = {
        },
     plugins: [
         new CleanWebpackPlugin(['./public/js'], {
-          exclude: ['index.html']
+          exclude: ['jquery.min.js', 'bootstrap.min.js', 'bootstrap.bundle.min.js']
         })
     ],
     watch: true

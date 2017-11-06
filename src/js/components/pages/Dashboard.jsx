@@ -68,9 +68,7 @@ class Dashboard extends React.Component {
         imageUrl:'',
         selectedPageId: '',
       })
-    }).catch(err =>  {
-      NotificationManager.error(err.response.data.Error.message, 'Error al guardar')
-    });
+    }).catch(err => NotificationManager.error(err.response.data.Error.message, 'Error al guardar'));
   }
 
 	render() {

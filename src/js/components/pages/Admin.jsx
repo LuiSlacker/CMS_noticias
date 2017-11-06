@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import * as PagesService from '../../services/pages-service';
 import { Form, FormGroup, Label, Input, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
-
+import { NotificationManager } from 'react-notifications';
 
 class Admin extends React.Component {
 	constructor() {
@@ -44,9 +44,10 @@ class Admin extends React.Component {
     evt.preventDefault();
     PagesService.persistOne(this.state.newPaginaName)
       .then(() => {
+        NotificationManager.success('Pagina guardado con éxito', 'Exito')
         this.fetchAllPages();
         this.setState({ newPaginaName: '' })
-      });
+      }).catch(err => NotificationManager.error(err.response.data.Error.message, 'Error al guardar'));
   }
 
 	render() {

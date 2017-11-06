@@ -77,7 +77,7 @@ class Home extends React.Component {
                           </div>
                         </Link>
                       </div>)
-                  : <div>This Page does not include noticias!</div>}
+                  : <Col><div>This Page does not include noticias!</div></Col>}
                 </Row>
               </TabPane>
             )}
