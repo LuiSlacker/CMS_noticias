@@ -32,6 +32,7 @@
     "path": "^0.12.7",
     "react-bootstrap": "^0.31.5",
     "react-notifications": "^1.4.3",
+    "react-tinymce": "^0.7.0",
     "reactstrap": "^5.0.0-alpha.3",
     "webpack": "^3.8.1",
     "winston": "^2.4.0",

@@ -10,6 +10,7 @@ import * as PagesService from '../../services/pages-service';
 import * as NoticesService from '../../services/notices-service';
 import { Form, FormGroup, Label, Input, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
+import TinyMCE from 'react-tinymce';
 
 class Dashboard extends React.Component {
 	constructor() {
@@ -112,7 +113,7 @@ class Dashboard extends React.Component {
                     id="title"
                     placeholder="Nueva noticia title" />
                 </FormGroup>
-                <FormGroup>
+                {/* <FormGroup>
                   <Input
                     type="textarea"
                     value={this.state.noticiaText}
@@ -121,7 +122,21 @@ class Dashboard extends React.Component {
                     rows='8'
                     id="text"
                     placeholder="Noticia text" />
-                </FormGroup>
+                </FormGroup> */                }
+                <TinyMCE
+                  content={this.state.noticiaText}
+                  name='noticiaText'
+                  onChange={(evt, editor) => this.setState({ noticiaText: editor.getContent() })}
+                  onKeyup={(evt, editor) => this.setState({ noticiaText: editor.getContent() })}
+                  config={{
+                    toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code | styleselect',
+                    plugins: '',
+                    statusbar: false,
+                    menubar: false,
+                    //toolbar: 'undo redo | bold italic | alignleft aligncenter alignright'
+                  }}
+                  //onChange={this.handleEditorChange}
+                />
                 <FormGroup>
                   <Label for="url">URL de imagen</Label>
                   <Input
