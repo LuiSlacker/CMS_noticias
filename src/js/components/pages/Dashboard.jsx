@@ -32,7 +32,10 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     PagesService.getAll()
-      .then(pages => this.setState({ pages }));
+      .then(pages => this.setState({
+        pages,
+        selectedPageId: pages[0]._id,
+      }));
   }
 
   toggle(activeTab) {
