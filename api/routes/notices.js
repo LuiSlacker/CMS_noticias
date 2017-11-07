@@ -6,16 +6,7 @@ const controller = require('../controllers/notices');
 
 noticesRouter.param('id', controller.params);
 
-noticesRouter.route('/')
-  .get(controller.all)
-  .post(controller.post);
-
-noticesRouter.route('/:id')
-  .get(controller.get)
-  .put(controller.put)
-  .delete(controller.delete);
-
-// include notices subrouter
-noticesRouter.use('/:id/comments', require('./comments'));
+noticesRouter.get('/', controller.all);
+noticesRouter.get('/:id', controller.get);
 
 module.exports = noticesRouter;

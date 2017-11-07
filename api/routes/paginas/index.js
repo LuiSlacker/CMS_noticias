@@ -2,7 +2,7 @@
 
 const express = require('express');
 const paginasRouter = express.Router({ mergeParams: true });
-const controller = require('../controllers/paginas');
+const controller = require('../../controllers/paginas');
 
 paginasRouter.param('id', controller.params);
 

@@ -17,9 +17,23 @@ const NoticeModel = new Schema({
     type: mongoose.SchemaTypes.Url,
   },
   likes: Number,
+  active: {
+    type: Boolean,
+    default: true,
+  },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 }, {
   timestamps: true,
 });
+
+NoticeModel.statics.queryWithFilter = function (queryParams) {
+  const filterQueryObj = {
+    $and: [
+      { $or: [{ undefined: { $eq: queryParams.userId } }, { user: queryParams.userId }] },
+    ],
+  };
+  return this.find(filterQueryObj);
+};
 
 module.exports = mongoose.model('Notice', NoticeModel);

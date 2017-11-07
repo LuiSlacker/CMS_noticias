@@ -96,12 +96,7 @@ class Dashboard extends React.Component {
 
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId='1'>
-            <Row>
-
-            </Row>
-          </TabPane>
-          <TabPane tabId='2'>
-              <h4>Nueva Noticia</h4>
+              <h5>Crear nueva noticia</h5>
               <Form>
                 <FormGroup>
                   <Label for="title">Title</Label>
@@ -113,16 +108,6 @@ class Dashboard extends React.Component {
                     id="title"
                     placeholder="Nueva noticia title" />
                 </FormGroup>
-                {/* <FormGroup>
-                  <Input
-                    type="textarea"
-                    value={this.state.noticiaText}
-                    onChange={this.handleChange}
-                    name='noticiaText'
-                    rows='8'
-                    id="text"
-                    placeholder="Noticia text" />
-                </FormGroup> */                }
                 <TinyMCE
                   content={this.state.noticiaText}
                   name='noticiaText'
@@ -133,9 +118,7 @@ class Dashboard extends React.Component {
                     plugins: '',
                     statusbar: false,
                     menubar: false,
-                    //toolbar: 'undo redo | bold italic | alignleft aligncenter alignright'
                   }}
-                  //onChange={this.handleEditorChange}
                 />
                 <FormGroup>
                   <Label for="url">URL de imagen</Label>
@@ -157,6 +140,11 @@ class Dashboard extends React.Component {
                 </FormGroup>
                 <Button onClick={this.handleBtnClick}>Submit</Button>
               </Form>
+          </TabPane>
+          <TabPane tabId='2'>
+            <Row>
+
+            </Row>
           </TabPane>
         </TabContent>
       </article>);

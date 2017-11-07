@@ -2,7 +2,7 @@
 
 const express = require('express');
 const commentsRouter = express.Router({ mergeParams: true });
-const controller = require('../controllers/comments');
+const controller = require('../../../../controllers/comments');
 
 commentsRouter.param('id', controller.params);
 
