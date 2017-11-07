@@ -21,6 +21,7 @@ const NoticeModel = new Schema({
     type: Boolean,
     default: true,
   },
+  page: { type: mongoose.Schema.Types.ObjectId, ref: 'Pagina' },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 }, {

@@ -18,13 +18,28 @@ exports.params = (req, res, next, id) => {
     .catch(err => next(new Error(err)));
 };
 
+exports.all = (req, res, next) => {
+  Notice
+    .queryWithFilter(req.query)
+    .populate('page', 'name')
+    .exec((err, populatedNotices) => {
+      if (err) return next(new Error(err));
+      res.json(populatedNotices);
+    });
+};
+
 exports.get = (req, res, next) => {
   res.json(req.pagina);
 };
 
-exports.all = (req, res, next) => {
-  Notice
-    .queryWithFilter(req.query)
-    .then(paginas => res.json(paginas))
-    .catch(err => next(new Error(err)));
+exports.put = (req, res, next) => {
+  req.notice.title = req.body.title || req.notice.title;
+  req.notice.text = req.body.text || req.notice.text;
+  req.notice.imageUrl = req.body.imageUrl || req.notice.imageUrl;
+  req.notice.likes = req.body.likes || req.notice.likes;
+  req.notice.active = req.body.active || req.notice.active;
+  req.notice
+    .save()
+    .then(notice => res.json(notice))
+    .catch(next);
 };

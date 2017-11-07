@@ -12,6 +12,7 @@ exports.params = (req, res, next, id) => {
     .then((pagina) => {
       if (pagina) {
         req.pagina = pagina;
+        req.paginId = id;
         next();
       } else next(Boom.notFound(`pagina with id: ${id} does not exist!`));
     })

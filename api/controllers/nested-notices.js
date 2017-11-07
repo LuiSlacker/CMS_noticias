@@ -32,6 +32,7 @@ exports.get = (req, res, next) => {
 
 exports.post = (req, res, next) => {
   const newNotice = new Notice(req.body);
+  newNotice.page = req.paginId;
   newNotice
     .save()
     .then(() => {

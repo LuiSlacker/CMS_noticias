@@ -13,7 +13,19 @@ export function getOneById(pageId, noticesId) {
     .then(response => response.data);
 };
 
+export function getAllForOneUser(userId) {
+  return axios.get(`/api/notices`) //TODO add userId as query param, once we have persisted users ?userId=${userId}
+    .then(response => response.data)
+};
+
+
 export function persistOne(pageId, noticiaObject) {
   return axios.post(`/api/paginas/${pageId}/notices`, noticiaObject)
     .then(response => response.data)
 };
+
+export function updateOne(noticiaObject) {
+  return axios.put(`/api/notices/${noticiaObject._id}/`, noticiaObject)
+    .then(response => response.data)
+};
+

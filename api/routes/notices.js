@@ -7,6 +7,8 @@ const controller = require('../controllers/notices');
 noticesRouter.param('id', controller.params);
 
 noticesRouter.get('/', controller.all);
-noticesRouter.get('/:id', controller.get);
+noticesRouter.route('/:id')
+  .get(controller.get)
+  .put(controller.put);
 
 module.exports = noticesRouter;

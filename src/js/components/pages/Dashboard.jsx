@@ -18,6 +18,7 @@ class Dashboard extends React.Component {
 
     this.state = {
       pages: [],
+      notices: [],
       activeTab: '1',
       noticiaTitle: '',
       noticiaText: '',
@@ -29,14 +30,20 @@ class Dashboard extends React.Component {
     this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleSetNoticeState = this.handleSetNoticeState.bind(this);
   }
 
   componentDidMount() {
-    PagesService.getAll()
-      .then(pages => this.setState({
+    Promise.all([
+      NoticesService.getAllForOneUser('<add userId once we have users>'),
+      PagesService.getAll(),
+    ]).then(([notices, pages]) => {
+      this.setState({
+        notices,
         pages,
         selectedPageId: pages[0]._id,
-      }));
+      });
+    });
   }
 
   toggle(activeTab) {
@@ -47,12 +54,23 @@ class Dashboard extends React.Component {
 
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
   handleSelectChange(select) {
     this.setState({ selectedPageId: select.currentTarget.selectedOptions[0].value })
+  }
+
+  handleSetNoticeState(evt, notice) {
+    notice.active = evt.currentTarget.selectedOptions[0].value;
+    evt.currentTarget.value = notice.active;
+    NoticesService.updateOne(notice)
+      .then(() => {
+        NotificationManager.success('Estado cambiado con éxito', 'Exito');
+        NoticesService.getAllForOneUser('<add userId once we have users>')
+          .then((notices) => this.setState({ notices }));
+      })
   }
 
   handleBtnClick(evt) {
@@ -62,7 +80,7 @@ class Dashboard extends React.Component {
       text: this.state.noticiaText,
       imageUrl: this.state.imageUrl
     }).then(() => {
-      NotificationManager.success('Noticia guardado con éxito', 'Exito')
+      NotificationManager.success('Noticia guardado con éxito', 'Exito');
       this.setState({
         noticiaTitle: '',
         noticiaText: '',
@@ -143,7 +161,31 @@ class Dashboard extends React.Component {
           </TabPane>
           <TabPane tabId='2'>
             <Row>
-
+              <Table striped hover>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Titulo</th>
+                    <th>Página</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.notices.map((notice, index) =>
+                    <tr key={index}>
+                      <th>{index+1}</th>
+                      <td>{notice.title}</td>
+                      <td>{notice.page ? notice.page.name: '-'}</td>
+                      <td>
+                        <select name="noticeStateSelect" value={notice.active} id="noticeStateSelect" onChange={(evt) => this.handleSetNoticeState(evt, notice)}>
+                            <option value='true'>Habilitado</option>
+                            <option value='false'>Inhabilitado</option>
+                        </select>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
             </Row>
           </TabPane>
         </TabContent>
