@@ -7,6 +7,9 @@ module.exports = {
     username: '<the username goes here>',
     password: '<the password goes here>',
   },
+  session: {
+    secret: '<the session secret here>',
+  },
   logs: {
     dir: '/logs',
     level: (process.env.NODE_ENV === 'production') ? 'info' : 'debug',

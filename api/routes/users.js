@@ -2,22 +2,12 @@
 
 const router = require('express').Router();
 const controller = require('../controllers/users');
+const passport = require('passport');
 
-router.param('id', controller.params);
+router.post('/login', passport.authenticate('local'), controller.login);
 
-router.route('/')
-  .get(controller.validateToken, controller.all)
-  .post(controller.validateToken, controller.post);
+router.post('/signup', controller.signup);
 
-router.route('/login')
-  .post(controller.login);
-
-router.route('/logout')
-  .post(controller.validateToken, controller.logout);
-
-router.route('/:id')
-  .get(controller.validateToken, controller.get)
-  .put(controller.validateToken, controller.put)
-  .delete(controller.validateToken, controller.delete);
+router.get('/logout', controller.logout);
 
 module.exports = router;
