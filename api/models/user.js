@@ -16,15 +16,15 @@ const UserModel = new Schema({
   password: {
     type: String,
   },
-  admin: {
+  isAdmin: {
     type: Boolean,
     required: true,
     default: false,
   },
-  editor: {
+  isEditor: {
     type: Boolean,
     required: true,
-    default: false,
+    default: true,
   },
 }, {
   timestamps: true,

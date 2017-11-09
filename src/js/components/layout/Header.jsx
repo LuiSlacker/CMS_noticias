@@ -7,7 +7,7 @@ import {
   withRouter
 } from 'react-router-dom';
 
-class Nav extends React.Component {
+class Header extends React.Component {
 	constructor() {
     super();
   }
@@ -22,12 +22,34 @@ class Nav extends React.Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to='/admin'>Admin</Link>
-            </li>
-            <li className="nav-item">
-            <Link className="nav-link" to='/dashboard'>Dashboard</Link>
-            </li>
+            {/* //TODO remove admin, dashboard when user management is implemented */}
+
+
+            {this.props.user.isAdmin &&
+              <li className="nav-item">
+                <Link className="nav-link" to='/admin'>Admin</Link>
+              </li>
+            }
+            {this.props.user.isEditor &&
+              <li className="nav-item">
+                <Link className="nav-link" to='/dashboard'>Dashboard</Link>
+              </li>
+            }
+            {!this.props.user._id &&
+              <li className="nav-item">
+                <Link className="nav-link" to='/login'>Login</Link>
+              </li>
+            }
+            {!this.props.user._id &&
+              <li className="nav-item">
+                <Link className="nav-link" to='/signup'>Signup</Link>
+              </li>
+            }
+            {this.props.user._id &&
+              <li className="nav-item">
+                <a className="nav-link" href='api/users/logout'>Logout</a>
+              </li>
+            }
             {/* <li className="nav-item">
               <a className="nav-link" href="contact.html">Contact</a>
             </li>
@@ -73,5 +95,5 @@ class Nav extends React.Component {
 
 }
 
-export default withRouter(Nav);
+export default withRouter(Header);
 
