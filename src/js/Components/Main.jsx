@@ -58,7 +58,11 @@ class Main extends React.Component {
           />
 
           <Route path="/admin" exact component={Admin}/>
-          <Route path="/dashboard" exact component={Dashboard}/>
+          <Route
+            path="/dashboard"
+            exact
+            render= {props => <Dashboard user={this.state.user} /> }
+          />
 
 				</div>
 			</div>

@@ -14,7 +14,7 @@ export function getOneById(pageId, noticesId) {
 };
 
 export function getAllForOneUser(userId) {
-  return axios.get(`/api/notices`) //TODO add userId as query param, once we have persisted users ?userId=${userId}
+  return axios.get(`/api/notices?userId=${userId}`)
     .then(response => response.data)
 };
 

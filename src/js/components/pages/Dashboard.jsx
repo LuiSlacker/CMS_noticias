@@ -29,7 +29,6 @@ class Dashboard extends React.Component {
     }
 
     this.toggle = this.toggle.bind(this);
-    this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleSetNoticeState = this.handleSetNoticeState.bind(this);
@@ -37,7 +36,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      NoticesService.getAllForOneUser('<add userId once we have users>'),
+      NoticesService.getAllForOneUser(this.props.user._id),
       PagesService.getAll(),
     ]).then(([notices, pages]) => {
       this.setState({
@@ -81,7 +80,8 @@ class Dashboard extends React.Component {
       title: this.state.noticiaTitle,
       summary: this.state.noticiaSummary,
       text: this.state.noticiaText,
-      imageUrl: this.state.imageUrl
+      imageUrl: this.state.imageUrl,
+      user: this.props.user._id,
     }).then(() => {
       NotificationManager.success('Noticia guardado con éxito', 'Exito');
       this.setState({
@@ -170,7 +170,7 @@ class Dashboard extends React.Component {
                     )}
                   </Input>
                 </FormGroup>
-                <Button onClick={this.handleBtnClick}>Submit</Button>
+                <Button onClick={this.handleBtnClick.bind(this)}>Submit</Button>
               </Form>
           </TabPane>
           <TabPane tabId='2'>
