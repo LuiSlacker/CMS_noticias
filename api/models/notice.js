@@ -13,6 +13,10 @@ const NoticeModel = new Schema({
     type: String,
     required: true,
   },
+  summary: {
+    type: String,
+    required: true,
+  },
   imageUrl: {
     type: mongoose.SchemaTypes.Url,
   },

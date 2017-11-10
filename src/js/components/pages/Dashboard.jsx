@@ -21,6 +21,7 @@ class Dashboard extends React.Component {
       notices: [],
       activeTab: '1',
       noticiaTitle: '',
+      noticiaSummary: '',
       noticiaText: '',
       imageUrl: '',
       selectedPageId: '',
@@ -77,6 +78,7 @@ class Dashboard extends React.Component {
     evt.preventDefault();
     NoticesService.persistOne(this.state.selectedPageId, {
       title: this.state.noticiaTitle,
+      summary: this.state.noticiaSummary,
       text: this.state.noticiaText,
       imageUrl: this.state.imageUrl
     }).then(() => {
@@ -125,6 +127,16 @@ class Dashboard extends React.Component {
                     name='noticiaTitle'
                     id="title"
                     placeholder="Nueva noticia title" />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="resumen">Resumen</Label>
+                  <Input
+                    type="text"
+                    value={this.state.noticiaSummary}
+                    onChange={this.handleChange}
+                    name='noticiaSummary'
+                    id="resumen"
+                    placeholder="Nueva noticia resumen" />
                 </FormGroup>
                 <TinyMCE
                   content={this.state.noticiaText}
