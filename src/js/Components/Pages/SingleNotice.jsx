@@ -10,8 +10,8 @@ import * as NoticeService from '../../services/notices-service';
 import MetaTags from 'react-meta-tags';
 
 class SingleNoticia extends React.Component {
-	constructor() {
-    super();
+	constructor(props) {
+    super(props);
 
     this.state = {
       notice: {},

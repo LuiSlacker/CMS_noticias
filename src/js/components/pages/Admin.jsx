@@ -13,8 +13,8 @@ import { NotificationManager } from 'react-notifications';
 import MetaDefault from '../helper/meta.jsx';
 
 class Admin extends React.Component {
-	constructor() {
-    super();
+	constructor(props) {
+    super(props);
 
     this.state = {
       pages: [],

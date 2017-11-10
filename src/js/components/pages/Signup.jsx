@@ -12,8 +12,8 @@ import { NotificationManager } from 'react-notifications';
 import MetaDefault from '../helper/meta.jsx';
 
 class Signup extends React.Component {
-	constructor() {
-    super();
+	constructor(props) {
+    super(props);
 
     this.state = {
       username: '',

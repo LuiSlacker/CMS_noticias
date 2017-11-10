@@ -14,8 +14,8 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, Ca
 import MetaDefault from '../helper/meta.jsx';
 
 class Home extends React.Component {
-	constructor() {
-    super();
+	constructor(props) {
+    super(props);
 
     this.state =  {
       pages: [],
