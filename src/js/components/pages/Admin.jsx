@@ -7,6 +7,7 @@ import {
   withRouter
 } from 'react-router-dom';
 import * as PagesService from '../../services/pages-service';
+import * as UserService from '../../services/user-service';
 import { Form, FormGroup, Label, Input, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
 
@@ -18,10 +19,9 @@ class Admin extends React.Component {
       pages: [],
       activeTab: '1',
       newPaginaName: '',
+      newUsername: '',
+      newUserEmail: '',
     }
-
-    this.toggle = this.toggle.bind(this);
-    this.handleBtnClick = this.handleBtnClick.bind(this);
     this.fetchAllPages = this.fetchAllPages.bind(this);
   }
 
@@ -50,6 +50,18 @@ class Admin extends React.Component {
       }).catch(err => NotificationManager.error(err.response.data.Error.message, 'Error al guardar'));
   }
 
+  persistNewUser(evt) {
+    UserService.createNewUser(this.state.newUsername, this.state.newUserEmail)
+      .then()
+      .catch(console.error);
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
 	render() {
 		return (
       <article>
@@ -57,7 +69,7 @@ class Admin extends React.Component {
           <NavItem>
             <NavLink
               className={this.state.activeTab === '1' ? 'active': '' }
-              onClick={() => { this.toggle('1'); }}
+              onClick={() => { this.toggle('1').bind(this); }}
             >
             Usarios
             </NavLink>
@@ -65,7 +77,7 @@ class Admin extends React.Component {
           <NavItem>
             <NavLink
               className={this.state.activeTab === '2' ? 'active': '' }
-              onClick={() => { this.toggle('2'); }}
+              onClick={() => { this.toggle('2').bind(this); }}
             >
             Páginas
             </NavLink>
@@ -75,7 +87,49 @@ class Admin extends React.Component {
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId='1'>
             <Row>
+              <Col sm='6'>
+                <Table striped hover>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>isValidated</th>
+                    </tr>
+                  </thead>
+                  <tbody>
 
+                  </tbody>
+                </Table>
+              </Col>
+              <Col sm='6'>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <h4>Add new user</h4>
+                <Form>
+                  <FormGroup>
+                    <Label for="newUsername">Nombre</Label>
+                    <Input
+                      type="text"
+                      value={this.state.newUsername}
+                      onChange={this.handleChange.bind(this)}
+                      id="newUsername"
+                      name="newUsername"/>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="newUserEmail">Email</Label>
+                    <Input
+                      type="text"
+                      value={this.state.newUserEmail}
+                      onChange={this.handleChange.bind(this)}
+                      name="newUserEmail"
+                      id="newUserEmail"/>
+                  </FormGroup>
+                  <Button onClick={this.persistNewUser.bind(this)}>Submit</Button>
+                </Form>
+              </Col>
             </Row>
           </TabPane>
           <TabPane tabId='2'>

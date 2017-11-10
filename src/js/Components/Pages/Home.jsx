@@ -46,7 +46,7 @@ class Home extends React.Component {
 	render() {
 		return (
       <article>
-        <div>
+        <div className="homepage">
           <Nav tabs>
             {this.state.pages.map((page, index) =>
               <NavItem key={index}>

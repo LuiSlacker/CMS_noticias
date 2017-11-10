@@ -15,3 +15,9 @@ export function logout() {
   return axios.get('/api/users/logout')
     .catch(console.error);
 };
+
+export function createNewUser(username, email) {
+  return axios.post('/api/users/create', { username, email })
+    .then(response => response.data)
+    .catch(console.error);
+};

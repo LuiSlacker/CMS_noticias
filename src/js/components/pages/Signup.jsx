@@ -43,40 +43,41 @@ class Signup extends React.Component {
 	render() {
 		return (
       <article>
-        <Card>
-        <CardHeader>Signup</CardHeader>
-        <CardBody>
-          <FormGroup>
-            <Label for="username">Username</Label>
-            <Input
-              type="text"
-              value={this.state.username}
-              onChange={this.handleChange}
-              id="username"
-              name="username"/>
-          </FormGroup>
-          <FormGroup>
-            <Label for="email">Email</Label>
-            <Input
-              type="text"
-              value={this.state.email}
-              onChange={this.handleChange}
-              id="email"
-              name="email"/>
-          </FormGroup>
-          <FormGroup>
-            <Label for="password">Password</Label>
-            <Input
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              id="password"
-              name="password"/>
-          </FormGroup>
-          <Button onClick={this.handleSignup}>Signup</Button>
-        </CardBody>
-        <CardFooter>Footer</CardFooter>
-      </Card>
+        <div className='signup-wrapper'>
+          <Card>
+            <CardHeader>Signup</CardHeader>
+            <CardBody>
+              <FormGroup>
+                <Label for="username">Username</Label>
+                <Input
+                  type="text"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                  id="username"
+                  name="username"/>
+              </FormGroup>
+              <FormGroup>
+                <Label for="email">Email</Label>
+                <Input
+                  type="text"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  id="email"
+                  name="email"/>
+              </FormGroup>
+              <FormGroup>
+                <Label for="password">Password</Label>
+                <Input
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  id="password"
+                  name="password"/>
+              </FormGroup>
+              <Button onClick={this.handleSignup}>Signup</Button>
+            </CardBody>
+          </Card>
+        </div>
       </article>);
 	}
 

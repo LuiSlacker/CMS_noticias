@@ -1,6 +1,7 @@
 'use strict';
 
 const User = require('../models/user');
+const Mailer = require('../../lib/mailer');
 
 exports.params = (req, res, next, id) => {
   User.findById(id)
@@ -24,6 +25,27 @@ exports.all = (req, res, next) => {
     .catch(err => next(new Error(err)));
 };
 
+exports.create = (req, res, next) => {
+  const newUser = new User({
+    username: req.body.username,
+    email: req.body.email,
+  });
+  newUser
+    .save()
+    .then((user) => {
+      res.status(201).json(user);
+
+      const mailOptions = {
+        from: '"CMS-noticias 👻" <CMS-noticias@noreply.com.>', // sender address
+        to: req.body.email, // list of receivers
+        subject: 'Hello ✔', // Subject line
+        text: 'Hello world?', // plain text body
+        html: '<b>Hello world?</b>', // html body
+      };
+      Mailer.sendMail(mailOptions);
+    })
+    .catch(err => next(new Error(err)));
+};
 
 exports.signup = (req, res, next) => {
   User.register(new User({
