@@ -21,3 +21,9 @@ export function createNewUser(username, email) {
     .then(response => response.data)
     .catch(console.error);
 };
+
+export function getAll() {
+  return axios.get('/api/users/')
+    .then(response => response.data)
+    .catch(console.error);
+};
