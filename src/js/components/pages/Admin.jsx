@@ -10,6 +10,7 @@ import * as PagesService from '../../services/pages-service';
 import * as UserService from '../../services/user-service';
 import { Form, FormGroup, Label, Input, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
+import MetaDefault from '../helper/meta.jsx';
 
 class Admin extends React.Component {
 	constructor() {
@@ -65,6 +66,7 @@ class Admin extends React.Component {
 	render() {
 		return (
       <article>
+        <MetaDefault />
         <Nav tabs>
           <NavItem>
             <NavLink

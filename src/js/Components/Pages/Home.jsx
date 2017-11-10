@@ -11,6 +11,7 @@ import * as NoticeService from '../../services/notices-service';
 import * as PagesService from '../../services/pages-service';
 
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import MetaDefault from '../helper/meta.jsx';
 
 class Home extends React.Component {
 	constructor() {
@@ -46,6 +47,7 @@ class Home extends React.Component {
 	render() {
 		return (
       <article>
+        <MetaDefault />
         <div className="homepage">
           <Nav tabs>
             {this.state.pages.map((page, index) =>

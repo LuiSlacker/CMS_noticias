@@ -7,6 +7,7 @@ import {
   withRouter
 } from 'react-router-dom';
 import * as NoticeService from '../../services/notices-service';
+import MetaTags from 'react-meta-tags';
 
 class SingleNoticia extends React.Component {
 	constructor() {
@@ -25,6 +26,10 @@ class SingleNoticia extends React.Component {
 	render() {
 		return (
       <article>
+        <MetaTags>
+            <title>{this.state.notice.title}</title>
+            <meta name="description" content={this.state.notice.summary} />
+        </MetaTags>
         <div>
           <ol className="breadcrumb">
             <li className="breadcrumb-item">

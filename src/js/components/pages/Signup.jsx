@@ -9,6 +9,7 @@ import {
 import * as UserService from '../../services/user-service';
 import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText, FormGroup, Label, Input } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
+import MetaDefault from '../helper/meta.jsx';
 
 class Signup extends React.Component {
 	constructor() {
@@ -43,6 +44,7 @@ class Signup extends React.Component {
 	render() {
 		return (
       <article>
+        <MetaDefault />
         <div className='signup-wrapper'>
           <Card>
             <CardHeader>Signup</CardHeader>

@@ -11,6 +11,7 @@ import * as NoticesService from '../../services/notices-service';
 import { Form, FormGroup, Label, Input, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
 import TinyMCE from 'react-tinymce';
+import MetaDefault from '../helper/meta.jsx';
 
 class Dashboard extends React.Component {
 	constructor() {
@@ -95,6 +96,7 @@ class Dashboard extends React.Component {
 	render() {
 		return (
       <article>
+        <MetaDefault />
         <Nav tabs>
           <NavItem>
             <NavLink
