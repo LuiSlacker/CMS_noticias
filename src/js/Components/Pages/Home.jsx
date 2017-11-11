@@ -12,6 +12,7 @@ import * as PagesService from '../../services/pages-service';
 
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import MetaDefault from '../helper/meta.jsx';
+import Poll from '../Layout/Poll.jsx';
 
 class Home extends React.Component {
 	constructor(props) {
@@ -80,6 +81,9 @@ class Home extends React.Component {
                       </div>)
                   : <Col><div>This Page does not include noticias!</div></Col>}
                 </Row>
+                <div className="pollBox">
+                  <Poll/>
+                </div>
               </TabPane>
             )}
           </TabContent>

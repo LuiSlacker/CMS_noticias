@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import * as NoticeService from '../../services/notices-service';
 import SocialShare from '../Layout/SocialShare.jsx';
+import Comments from '../Layout/Comments.jsx';
 import MetaTags from 'react-meta-tags';
 
 class SingleNoticia extends React.Component {
@@ -54,6 +55,11 @@ class SingleNoticia extends React.Component {
               <div dangerouslySetInnerHTML={this.setContent()} />
             </div>
         </div>
+
+        <div className="pollBox">
+          <Comments />
+        </div>
+
       </article>);
 	}
 
