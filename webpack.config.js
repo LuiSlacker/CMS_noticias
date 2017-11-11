@@ -27,5 +27,8 @@ module.exports = {
           exclude: ['jquery.min.js', 'bootstrap.min.js', 'bootstrap.bundle.min.js']
         })
     ],
+    watchOptions: {
+        poll: true
+    },
     watch: true
 };

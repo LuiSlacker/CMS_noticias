@@ -7,6 +7,7 @@ import {
   withRouter
 } from 'react-router-dom';
 import * as NoticeService from '../../services/notices-service';
+import SocialShare from '../Layout/SocialShare.jsx';
 import MetaTags from 'react-meta-tags';
 
 class SingleNoticia extends React.Component {
@@ -42,6 +43,7 @@ class SingleNoticia extends React.Component {
         <div className="row">
             <div className="col-lg-6">
               <img className="img-fluid rounded mb-4" src={this.state.notice.imageUrl} alt="Noticia Image" />
+              <SocialShare notice={this.state.notice}/>
             </div>
             <div className="col-lg-6">
               <h2>{this.state.notice.title}</h2>
