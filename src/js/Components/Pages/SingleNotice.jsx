@@ -24,6 +24,10 @@ class SingleNoticia extends React.Component {
       .then(notice => this.setState({ notice }));
   }
 
+  setContent(){
+    return {__html: unescape(this.state.notice.text)};
+  }
+
 	render() {
 		return (
       <article>
@@ -47,7 +51,7 @@ class SingleNoticia extends React.Component {
             </div>
             <div className="col-lg-6">
               <h2>{this.state.notice.title}</h2>
-              <p>{this.state.notice.text}</p>
+              <div dangerouslySetInnerHTML={this.setContent()} />
             </div>
         </div>
       </article>);
