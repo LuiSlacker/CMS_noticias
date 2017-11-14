@@ -11,6 +11,9 @@ import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstr
 import { NotificationManager } from 'react-notifications';
 import TinyMCE from 'react-tinymce';
 import * as UserService from '../../../services/user-service';
+import * as PagesService from '../../../services/pages-service';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 class User extends React.Component {
 	constructor(props) {
@@ -18,14 +21,31 @@ class User extends React.Component {
 
     this.state = {
       users: [],
+      pagesOptions: [],
       newUsername: '',
       newUserEmail: '',
+      selectedPages: [],
+      selectedUser: '',
     }
   }
 
   componentDidMount() {
-    UserService.getAll()
-      .then(users => this.setState({ users }));
+    Promise.all([
+      UserService.getAll(),
+      PagesService.getAll(),
+    ]).then(([users, pages]) => {
+      this.setState({
+        users,
+        pagesOptions: this.populateMultiSelectOptions(pages),
+      });
+    });
+  }
+
+  populateMultiSelectOptions(pages) {
+    return pages.map(page => ({
+      value: page._id,
+      label: page.name,
+    }));
   }
 
   persistNewUser(evt) {
@@ -38,6 +58,20 @@ class User extends React.Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
+  }
+
+  updateUserData() {
+    UserService.updateAssignedPages(this.state.selectedUser, this.state.selectedPages)
+      .then(() => NotificationManager.success('Pagina guardado con éxito', 'Exito'))
+      .catch(() => NotificationManager.error(err.response.data.Error.message, 'Error al guardar'));
+  }
+
+  fetchAssignedPages(userId) {
+    UserService.fetchAssignedPageIds(userId)
+      .then((assignedPages) => this.setState({
+        selectedPages: assignedPages,
+        selectedUser: userId,
+      }));
   }
 
 	render() {
@@ -57,7 +91,7 @@ class User extends React.Component {
               </thead>
               <tbody>
                 {this.state.users.map((user, index)  =>
-                  <tr key={index}>
+                  <tr key={index} onClick={() => this.fetchAssignedPages.bind(this)(user._id)}>
                     <td>{index +1}</td>
                     <td>{user.username}</td>
                     <td>{user.email}</td>
@@ -68,6 +102,21 @@ class User extends React.Component {
             </Table>
           </Col>
           <Col sm='6'>
+            {this.state.selectedUser !== ''
+            ? <div>
+                <FormGroup>
+                  <Select
+                    multi={true}
+                    name="form-field-name"
+                    value={this.state.selectedPages}
+                    options={this.state.pagesOptions}
+                    onChange={val => this.setState({ selectedPages: val })}
+                  />
+                </FormGroup>
+                <Button onClick={this.updateUserData.bind(this)}>Update</Button>
+              </div>
+            : 'Select a user to assign pages.'
+            }
           </Col>
         </Row>
         <Row>

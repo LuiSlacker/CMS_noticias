@@ -37,6 +37,7 @@
     "react-bootstrap": "^0.31.5",
     "react-meta-tags": "^0.3.0",
     "react-notifications": "^1.4.3",
+    "react-select": "^1.0.0-rc.10",
     "react-share": "^1.16.0",
     "react-tinymce": "^0.7.0",
     "reactstrap": "^5.0.0-alpha.3",

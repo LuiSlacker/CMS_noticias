@@ -25,6 +25,22 @@ exports.all = (req, res, next) => {
     .catch(err => next(new Error(err)));
 };
 
+exports.updateAssignedPages = (req, res, next) => {
+  if (req.body.assignedPages === undefined) return next(new Error('assigned pages not defined!'));
+  req.user.assignedPages = req.body.assignedPages;
+  req.user
+    .save()
+    .then(user => res.json(user))
+    .catch(next);
+};
+
+exports.fetchAssignedPages = (req, res, next) => {
+  req.user.populate('assignedPages', '_id, name', (err, user) => {
+    if (err) return next(err);
+    res.json(user.assignedPages);
+  });
+};
+
 exports.create = (req, res, next) => {
   const newUser = new User({
     username: req.body.username,

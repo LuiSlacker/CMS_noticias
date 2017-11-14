@@ -27,3 +27,22 @@ export function getAll() {
     .then(response => response.data)
     .catch(console.error);
 };
+
+export function updateAssignedPages(userId, assigedPagesOptions) {
+  const assignedPages = assigedPagesOptions.map(pageOption => pageOption.value);
+  return axios.patch(`/api/users/${userId}`, { assignedPages })
+    .then(response => response.data)
+    .catch(console.error);
+}
+
+export function fetchAssignedPageIds(userId) {
+  return axios.get(`/api/users/${userId}/assignedPages`)
+    .then(response => response.data.map(page => page._id))
+    .catch(console.error);
+}
+
+export function fetchAssignedPages(userId) {
+  return axios.get(`/api/users/${userId}/assignedPages`)
+    .then(response => response.data)
+    .catch(console.error);
+}

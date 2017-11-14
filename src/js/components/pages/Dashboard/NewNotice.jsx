@@ -10,7 +10,7 @@ import * as NoticesService from '../../../services/notices-service';
 import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
 import TinyMCE from 'react-tinymce';
-import * as PagesService from '../../../services/pages-service';
+import * as UserService from '../../../services/user-service';
 
 class NewNotice extends React.Component {
 	constructor(props) {
@@ -27,10 +27,10 @@ class NewNotice extends React.Component {
   }
 
   componentDidMount() {
-    PagesService.getAll()
-      .then(pages => this.setState({
-        pages,
-        selectedPageId: pages[0]._id,
+    UserService.fetchAssignedPages(this.props.user._id)
+      .then(assignedPages => this.setState({
+        pages: assignedPages,
+        selectedPageId: assignedPages[0]._id,
       }));
   }
 
