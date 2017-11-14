@@ -16,18 +16,8 @@ class Pages extends React.Component {
     super(props);
 
     this.state = {
-      pages: [],
       newPaginaName: '',
     }
-  }
-
-  componentDidMount() {
-    this.fetchAllPages.bind(this)();
-  }
-
-  fetchAllPages() {
-    PagesService.getAll()
-      .then(pages => this.setState({ pages }));
   }
 
   handleBtnClick(evt) {
@@ -35,7 +25,7 @@ class Pages extends React.Component {
     PagesService.persistOne(this.state.newPaginaName)
       .then(() => {
         NotificationManager.success('Pagina guardado con éxito', 'Exito')
-        this.fetchAllPages.bind(this)();
+        this.props.updatePages();
         this.setState({ newPaginaName: '' })
       }).catch(err => NotificationManager.error(err.response.data.Error.message, 'Error al guardar'));
   }
@@ -58,7 +48,7 @@ class Pages extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.pages.map((page, index) =>
+              {this.props.pages.map((page, index) =>
                 <tr key={index}>
                   <th scope="row">{index+1}</th>
                   <td>{page.name}</td>

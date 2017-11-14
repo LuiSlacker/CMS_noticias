@@ -11,7 +11,6 @@ import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstr
 import { NotificationManager } from 'react-notifications';
 import TinyMCE from 'react-tinymce';
 import * as UserService from '../../../services/user-service';
-import * as PagesService from '../../../services/pages-service';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
@@ -21,7 +20,6 @@ class User extends React.Component {
 
     this.state = {
       users: [],
-      pagesOptions: [],
       newUsername: '',
       newUserEmail: '',
       selectedPages: [],
@@ -30,22 +28,8 @@ class User extends React.Component {
   }
 
   componentDidMount() {
-    Promise.all([
-      UserService.getAll(),
-      PagesService.getAll(),
-    ]).then(([users, pages]) => {
-      this.setState({
-        users,
-        pagesOptions: this.populateMultiSelectOptions(pages),
-      });
-    });
-  }
-
-  populateMultiSelectOptions(pages) {
-    return pages.map(page => ({
-      value: page._id,
-      label: page.name,
-    }));
+    UserService.getAll()
+      .then(users => this.setState({ users }));
   }
 
   persistNewUser(evt) {
@@ -66,7 +50,7 @@ class User extends React.Component {
       .catch(() => NotificationManager.error(err.response.data.Error.message, 'Error al guardar'));
   }
 
-  fetchAssignedPages(userId) {
+  handleTableUserClick(userId) {
     UserService.fetchAssignedPageIds(userId)
       .then((assignedPages) => this.setState({
         selectedPages: assignedPages,
@@ -91,7 +75,7 @@ class User extends React.Component {
               </thead>
               <tbody>
                 {this.state.users.map((user, index)  =>
-                  <tr key={index} onClick={() => this.fetchAssignedPages.bind(this)(user._id)}>
+                  <tr key={index} onClick={() => this.handleTableUserClick.bind(this)(user._id)}>
                     <td>{index +1}</td>
                     <td>{user.username}</td>
                     <td>{user.email}</td>
@@ -109,7 +93,7 @@ class User extends React.Component {
                     multi={true}
                     name="form-field-name"
                     value={this.state.selectedPages}
-                    options={this.state.pagesOptions}
+                    options={this.props.pageOptions}
                     onChange={val => this.setState({ selectedPages: val })}
                   />
                 </FormGroup>
