@@ -27,8 +27,10 @@ class About extends React.Component {
             </ol>
           </div>
           <div className="row">
-            <div className="col-lg-6">
-              <h2> Developed by </h2><br/>
+            <div className="col-lg-12">
+              <p>This applicacion was developed within the course <strong>Construcción de Software Bajo la Web</strong> at UniNorte, Barranquilla, Colombia</p>
+              <p>It serves to showcase the basic features of a <strong>content management system.</strong></p>
+              <h4> Developed by </h4><br/>
               <div className="col-lg-12 aboutMedia">
                 <Media>
                   <Media left href="https://github.com/mateodaza">
