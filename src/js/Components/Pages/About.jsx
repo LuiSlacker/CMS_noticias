@@ -7,6 +7,7 @@ import {
   withRouter
 } from 'react-router-dom';
 import { Media } from 'reactstrap';
+import MetaDefault from '../helper/meta.jsx';
 
 class About extends React.Component {
 	constructor(props) {
@@ -16,6 +17,7 @@ class About extends React.Component {
 	render() {
 		return (
         <article>
+          <MetaDefault />
           <div>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
