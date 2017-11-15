@@ -75,6 +75,7 @@ class Home extends React.Component {
                             <img className="card-img-top" src={notice.imageUrl} alt="Noticia Image" />
                             <div className="card-body">
                               <h4 className="card-title">{notice.title}</h4>
+                              <p className="card-text">{notice.summary}</p>
                             </div>
                           </div>
                         </Link>
