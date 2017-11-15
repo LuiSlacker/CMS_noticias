@@ -20,9 +20,14 @@ exports.params = (req, res, next, id) => {
 
 exports.all = (req, res, next) => {
   req.pagina
-    .populate('notices', (err, populatedPagina) => {
+    .populate({
+      path: 'notices',
+    }, (err, populatedPagina) => {
       if (err) return next(err);
-      res.json(populatedPagina.notices);
+      const notices = populatedPagina.notices.filter((notice) => {
+        return notice.active;
+      });
+      res.json(notices);
     });
 };
 
