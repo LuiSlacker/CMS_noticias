@@ -26,6 +26,7 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "jsonwebtoken": "^8.1.0",
+    "moment": "^2.19.2",
     "mongoose": "^4.12.4",
     "mongoose-type-url": "^1.0.2",
     "morgan": "^1.9.0",

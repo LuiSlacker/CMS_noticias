@@ -10,6 +10,7 @@ import * as NoticesService from '../../../services/notices-service';
 import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
 import * as PagesService from '../../../services/pages-service';
+import moment from 'moment';
 
 class Pages extends React.Component {
 	constructor(props) {
@@ -45,6 +46,8 @@ class Pages extends React.Component {
               <tr>
                 <th>#</th>
                 <th>Name</th>
+                <th>Created at</th>
+                <th>Updated at</th>
               </tr>
             </thead>
             <tbody>
@@ -52,6 +55,8 @@ class Pages extends React.Component {
                 <tr key={index}>
                   <th scope="row">{index+1}</th>
                   <td>{page.name}</td>
+                  <td>{moment(page.createdAt).format('MMM Do YYYY')}</td>
+                  <td>{moment(page.updatedAt).format('MMM Do YYYY')}</td>
                 </tr>
               )}
             </tbody>
