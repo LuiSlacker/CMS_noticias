@@ -34,7 +34,7 @@ class Login extends React.Component {
     evt.preventDefault();
     UserService.login(this.state.username, this.state.password)
       .then((user) => {
-        NotificationManager.success('Logged in con éxito', 'Éxito')
+        NotificationManager.success('Logged in con éxito', 'Éxito');
         this.props.setUser(user);
         this.props.history.push('/');
       }).catch(err => console.log(err));

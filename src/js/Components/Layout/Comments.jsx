@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import { Media, FormGroup, Label, Input, Card, CardBody, Button } from 'reactstrap';
 import * as NoticesService from '../../services/notices-service';
+import { NotificationManager } from 'react-notifications';
 
 class Comments extends React.Component {
 	constructor(props) {
@@ -24,7 +25,6 @@ class Comments extends React.Component {
   }
 
   fetchAllComments(noticeId) {
-    console.log(noticeId);
     NoticesService.getAllComments(noticeId)
       .then(comments => this.setState({ comments }))
       .catch(console.error);
@@ -41,9 +41,10 @@ class Comments extends React.Component {
       author: this.state.name,
       content: this.state.comment,
     }).then(() => {
+      NotificationManager.success('Comment saved successfully.', 'Success');
       this.fetchAllComments.bind(this)(this.props.noticeId);
       this.setState({ name: '', comment: '' });
-    });
+    }).catch(() => NotificationManager.error('Failed to save comment', 'Error'));
   }
 
 	render() {
