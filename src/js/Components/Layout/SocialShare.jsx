@@ -33,7 +33,7 @@ class SocialShare extends React.Component {
   render() {
     return (
       <div className='socialComponent'>
-        <FacebookShareButton url={window.location.href} title={this.props.notice.title}>
+        <FacebookShareButton url={window.location.href} quote={this.props.notice.title}>
           <FacebookIcon size={40}/>
         </FacebookShareButton>
           <TwitterShareButton url={window.location.href} title={this.props.notice.title}>
