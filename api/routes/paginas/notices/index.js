@@ -15,7 +15,4 @@ noticesRouter.route('/:id')
   .put(controller.put)
   .delete(controller.delete);
 
-// include notices subrouter
-noticesRouter.use('/:id/comments', require('./comments'));
-
 module.exports = noticesRouter;
