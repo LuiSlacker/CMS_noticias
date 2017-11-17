@@ -11,6 +11,7 @@ import { Form, FormGroup, Label, Input, Table, TabContent, TabPane, Nav, NavItem
 import MetaDefault from '../helper/meta.jsx';
 import NewNotice from './Dashboard/NewNotice.jsx';
 import NoticeList from './Dashboard/NoticeList.jsx';
+import NewPoll from './Dashboard/NewPoll.jsx';
 import * as NoticesService from '../../services/notices-service';
 
 class Dashboard extends React.Component {
@@ -48,7 +49,7 @@ class Dashboard extends React.Component {
               className={this.state.activeTab === '1' ? 'active': '' }
               onClick={() => { this.toggle('1') }}
             >
-            Edición
+            New News-Entry
             </NavLink>
           </NavItem>
           <NavItem>
@@ -56,7 +57,15 @@ class Dashboard extends React.Component {
               className={this.state.activeTab === '2' ? 'active': '' }
               onClick={() => { this.toggle('2') }}
             >
-            Noticias
+            News-list
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={this.state.activeTab === '3' ? 'active': '' }
+              onClick={() => { this.toggle('3') }}
+            >
+            New poll
             </NavLink>
           </NavItem>
         </Nav>
@@ -70,6 +79,9 @@ class Dashboard extends React.Component {
           </TabPane>
           <TabPane tabId='2'>
             <NoticeList user={this.props.user} notices={this.state.notices} />
+          </TabPane>
+          <TabPane tabId='3'>
+            <NewPoll notices={this.state.notices} />
           </TabPane>
         </TabContent>
       </article>);
