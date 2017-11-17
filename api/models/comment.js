@@ -4,11 +4,14 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const CommentModel = new Schema({
-  text: {
+  content: {
     type: String,
     required: true,
   },
-  author: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  author: {
+    type: String,
+    required: true,
+  },
 }, {
   timestamps: true,
 });

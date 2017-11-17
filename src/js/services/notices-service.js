@@ -29,3 +29,13 @@ export function updateOne(noticiaObject) {
     .then(response => response.data)
 };
 
+export function getAllComments(noticeId) {
+  return axios.get(`/api/notices/${noticeId}/comments`)
+    .then(response => response.data)
+};
+
+export function persistComment(noticeId, data) {
+  return axios.post(`/api/notices/${noticeId}/comments`, data)
+    .then(response => response.data)
+};
+

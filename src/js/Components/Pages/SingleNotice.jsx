@@ -57,7 +57,7 @@ class SingleNoticia extends React.Component {
         </div>
 
         <div className="pollBox">
-          <Comments />
+          <Comments noticeId={this.state.notice._id}/>
         </div>
 
       </article>);

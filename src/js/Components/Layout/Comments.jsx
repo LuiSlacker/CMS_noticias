@@ -7,14 +7,27 @@ import {
   withRouter
 } from 'react-router-dom';
 import { Media, FormGroup, Label, Input, Card, CardBody, Button } from 'reactstrap';
+import * as NoticesService from '../../services/notices-service';
 
 class Comments extends React.Component {
 	constructor(props) {
     super(props);
 
     this.state = {
-      comment: ''
+      comments: [],
+      comment: '',
+      name: '',
     }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.noticeId != undefined) this.fetchAllComments.bind(this)(nextProps.noticeId);
+  }
+
+  fetchAllComments(noticeId) {
+    console.log(noticeId);
+    NoticesService.getAllComments(noticeId)
+      .then(comments => this.setState({ comments }))
+      .catch(console.error);
   }
 
   handleChange(e) {
@@ -23,39 +36,53 @@ class Comments extends React.Component {
     });
   }
 
+  handleClick() {
+    NoticesService.persistComment(this.props.noticeId, {
+      author: this.state.name,
+      content: this.state.comment,
+    }).then(() => {
+      this.fetchAllComments.bind(this)(this.props.noticeId);
+      this.setState({ name: '', comment: '' });
+    });
+  }
+
 	render() {
       return (
       <div className="commentsBox">
-          <h2> Comments </h2><br/>
-          {
-            // Map with all comments from api
-          }
-          <Media>
-            <Media left>
-              <img src="https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png" 
-                  alt="Generic placeholder image" height="42" width="42"/>
-            </Media>
-            <Media body>
-              <Media heading>
-                <h4> Example Comment </h4>
+          <h2>Comments</h2>
+          {this.state.comments.map((comment, index) =>
+            <Media key={index}>
+              <Media body>
+                <Media heading>
+                  <strong>{comment.author}</strong>
+                </Media>
+                <p>{comment.content}</p>
               </Media>
-              <p> Content </p>
             </Media>
-          </Media>
+          )}
 
           <br/>
           <Card>
             <CardBody>
-            <FormGroup>
-              <Label for="comment"> Say something! </Label>
-              <Input
-                type="text"
-                value={this.state.comment}
-                onChange={this.handleChange}
-                id="comment"
-                name="comment"/>
-            </FormGroup>
-            <Button> Submit </Button>
+              <FormGroup>
+                <Label for="name">Your name:</Label>
+                <Input
+                  type="text"
+                  value={this.state.name}
+                  onChange={this.handleChange.bind(this)}
+                  id="name"
+                  name="name"/>
+              </FormGroup>
+              <FormGroup>
+                <Label for="comment">Say something!</Label>
+                <Input
+                  type="text"
+                  value={this.state.comment}
+                  onChange={this.handleChange.bind(this)}
+                  id="comment"
+                  name="comment"/>
+              </FormGroup>
+              <Button onClick={this.handleClick.bind(this)}>Submit</Button>
             </CardBody>
           </Card>
       </div>);
