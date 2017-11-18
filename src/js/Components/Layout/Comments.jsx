@@ -50,17 +50,19 @@ class Comments extends React.Component {
 	render() {
       return (
       <div className="commentsBox">
-          <h3>Comments</h3>
-          {this.state.comments.map((comment, index) =>
-            <Media className="comment" key={index}>
-              <Media body>
-                <Media heading>
-                  <strong>{comment.author}</strong>
+      <h3>Comments</h3>
+      <div className="comments">
+        {this.state.comments.map((comment, index) =>
+              <Media className="comment" key={index}>
+                <Media body>
+                  <Media heading>
+                    <strong>{comment.author}</strong>
+                  </Media>
+                  <p>{comment.content}</p>
                 </Media>
-                <p>{comment.content}</p>
               </Media>
-            </Media>
-          )}
+        )}
+      </div>
 
           <br/>
           <Card>

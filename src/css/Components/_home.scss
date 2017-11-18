@@ -43,6 +43,10 @@
   h3 {
     align-self: center;
   }
+  .comments{
+    height: 15em;    
+    overflow: scroll;    
+  }
   .comment {
     padding-left: 2em;
   }
