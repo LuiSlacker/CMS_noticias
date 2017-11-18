@@ -50,9 +50,9 @@ class Comments extends React.Component {
 	render() {
       return (
       <div className="commentsBox">
-          <h2>Comments</h2>
+          <h3>Comments</h3>
           {this.state.comments.map((comment, index) =>
-            <Media key={index}>
+            <Media className="comment" key={index}>
               <Media body>
                 <Media heading>
                   <strong>{comment.author}</strong>
