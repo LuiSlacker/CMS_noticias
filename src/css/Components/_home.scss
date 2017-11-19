@@ -15,14 +15,13 @@
 	display: flex;
 	justify-content: center;
   width: auto;
-  min-width: 50%;
-  height: 100%;
-  min-height: 28em;
+  min-width: 100%;
+  height: auto;
+  min-height: 100%;
   color: rgba(40,48,51, 1);  /* Our Black? */
   background-color: rgba(247,247,247,1);
   margin: 5em;
   padding: 1em;
-  text-align: center;
 }
 
 .pollBox {
@@ -44,7 +43,8 @@
     align-self: center;
   }
   .comments{
-    height: 15em;    
+    max-height: 15em;   
+    height: auto; 
     overflow: scroll;    
   }
   .comment {
