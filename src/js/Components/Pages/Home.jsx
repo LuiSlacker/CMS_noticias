@@ -4,26 +4,24 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
-
-import * as NoticeService from '../../services/notices-service';
-import * as PagesService from '../../services/pages-service';
-
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import MetaDefault from '../helper/meta.jsx';
 import Poll from '../Layout/Poll.jsx';
+import * as NoticeService from '../../services/notices-service';
+import * as PagesService from '../../services/pages-service';
 
 class Home extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
 
-    this.state =  {
+    this.state = {
       pages: [],
       notices: [],
       poll: {},
-      activePage: ""
-    }
+      activePage: '',
+    };
 
     this.toggle = this.toggle.bind(this);
   }
@@ -36,9 +34,9 @@ class Home extends React.Component {
         this.fetchPoll.bind(this)(pages[0]._id),
       ]))
       .then(([pages, notices]) => this.setState({
-          pages,
-          notices,
-          activePage: pages[0]._id,
+        pages,
+        notices,
+        activePage: pages[0]._id,
       }));
   }
 
@@ -54,15 +52,15 @@ class Home extends React.Component {
         NoticeService.getAllForOnePage(activePage),
         PagesService.getPoll(activePage),
       ]).then(([notices, poll]) => this.setState({
-          notices,
-          activePage,
-          poll,
+        notices,
+        activePage,
+        poll,
       }));
     }
   }
 
-	render() {
-		return (
+  render() {
+    return (
       <article>
         <MetaDefault />
         <div className="homepage">
@@ -70,13 +68,12 @@ class Home extends React.Component {
             {this.state.pages.map((page, index) =>
               <NavItem key={index}>
                 <NavLink
-                  className={this.state.activePage === page._id ? 'active': '' }
+                  className={this.state.activePage === page._id ? 'active' : '' }
                   onClick={() => { this.toggle(page._id); }}
                 >
-                {page.name}
+                  {page.name}
                 </NavLink>
-              </NavItem>
-            )}
+              </NavItem>)}
           </Nav>
 
           <TabContent activeTab={this.state.activePage}>
@@ -84,7 +81,7 @@ class Home extends React.Component {
               <TabPane key={index} tabId={page._id}>
                 <Row>
                   {this.state.notices.length > 0
-                  ? this.state.notices.map((notice, index) =>
+                    ? this.state.notices.map((notice, index) =>
                       <div key={index} className="col-lg-4 col-sm-6 portfolio-item">
                         <Link className="nav-link reset" to={`paginas/${this.state.activePage}/noticias/${notice._id}`}>
                           <div className="card h-100">
@@ -96,7 +93,7 @@ class Home extends React.Component {
                           </div>
                         </Link>
                       </div>)
-                  : <Col><div>This Page does not include noticias!</div></Col>}
+                    : <Col><div>This Page does not include noticias!</div></Col>}
                 </Row>
                 {this.state.poll.question !== undefined &&
                   <div className="pollBox">
@@ -106,13 +103,11 @@ class Home extends React.Component {
                       fetchPoll={this.fetchPoll.bind(this)}/>
                   </div>
                 }
-              </TabPane>
-            )}
+              </TabPane>)}
           </TabContent>
         </div>
       </article>);
-	}
-
+  }
 }
 
 export default withRouter(Home);

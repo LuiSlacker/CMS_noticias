@@ -4,22 +4,22 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
-import * as UserService from '../../services/user-service';
-import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText, FormGroup, Label, Input } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
+import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText, FormGroup, Label, Input } from 'reactstrap';
 import MetaDefault from '../helper/meta.jsx';
+import * as UserService from '../../services/user-service';
 
 class Signup extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
       username: '',
       password: '',
       email: '',
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
@@ -41,8 +41,8 @@ class Signup extends React.Component {
       }).catch(err => console.log(err));
   }
 
-	render() {
-		return (
+  render() {
+    return (
       <article>
         <MetaDefault />
         <div className='signup-wrapper'>
@@ -81,8 +81,7 @@ class Signup extends React.Component {
           </Card>
         </div>
       </article>);
-	}
-
+  }
 }
 
 export default withRouter(Signup);

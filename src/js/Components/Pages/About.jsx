@@ -4,20 +4,16 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
 import { Media } from 'reactstrap';
 import MetaDefault from '../helper/meta.jsx';
 
 class About extends React.Component {
-	constructor(props) {
-    super(props);
-  }
-
-	render() {
-		return (
-        <article>
-          <MetaDefault />
+  render() {
+    return (
+      <article>
+        <MetaDefault />
           <div>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
@@ -52,25 +48,24 @@ class About extends React.Component {
                       <a href="https://github.com/LuiSlacker"> Ludwig Goohsen </a>
                     </Media>
                   </Media>
-                </Media>
+              </Media>
 
-                <Media>
-                  <Media left href="https://github.com/JoaoRacedo">
-                    <img src="https://avatars0.githubusercontent.com/u/20033179" alt="Generic placeholder image" height="42" width="42"/>
-                  </Media>
-                  <Media body>
-                    <Media heading>
-                      <a href="https://github.com/JoaoRacedo"> Sebastian Racedo </a>
-                    </Media>
+              <Media>
+                <Media left href="https://github.com/JoaoRacedo">
+                  <img src="https://avatars0.githubusercontent.com/u/20033179" alt="Generic placeholder image" height="42" width="42"/>
+                </Media>
+                <Media body>
+                  <Media heading>
+                    <a href="https://github.com/JoaoRacedo"> Sebastian Racedo </a>
                   </Media>
                 </Media>
-              </div>
+              </Media>
             </div>
           </div>
-        </article>
-     );
-	}
-
+        </div>
+      </article>
+    );
+  }
 }
 
 export default withRouter(About);

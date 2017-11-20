@@ -4,7 +4,7 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
@@ -20,11 +20,11 @@ class NoticeList extends React.Component {
         NotificationManager.success('Estado cambiado con éxito', 'Exito');
         NoticesService.getAllForOneUser(this.props.user._id)
           .then(notices => this.setState({ notices }));
-      })
+      });
   }
 
-	render() {
-		return (
+  render() {
+    return (
       <div>
         <Row>
           <Table striped hover>
@@ -39,23 +39,21 @@ class NoticeList extends React.Component {
             <tbody>
               {this.props.notices.map((notice, index) =>
                 <tr key={index}>
-                  <th>{index+1}</th>
+                  <th>{index + 1}</th>
                   <td>{notice.title}</td>
-                  <td>{notice.page ? notice.page.name: '-'}</td>
+                  <td>{notice.page ? notice.page.name : '-'}</td>
                   <td>
-                    <select name="noticeStateSelect" value={notice.active} id="noticeStateSelect" onChange={(evt) => this.handleSetNoticeState(evt, notice)}>
-                        <option value='true'>Habilitado</option>
-                        <option value='false'>Inhabilitado</option>
+                    <select name="noticeStateSelect" value={notice.active} id="noticeStateSelect" onChange={evt => this.handleSetNoticeState(evt, notice)}>
+                      <option value='true'>Habilitado</option>
+                      <option value='false'>Inhabilitado</option>
                     </select>
                   </td>
-                </tr>
-              )}
+                </tr>)}
             </tbody>
           </Table>
         </Row>
       </div>);
-	}
-
+  }
 }
 
 export default withRouter(NoticeList);

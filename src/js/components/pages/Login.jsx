@@ -4,7 +4,7 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
 import * as UserService from '../../services/user-service';
 import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText, FormGroup, Label, Input } from 'reactstrap';
@@ -12,13 +12,13 @@ import { NotificationManager } from 'react-notifications';
 import MetaDefault from '../helper/meta.jsx';
 
 class Login extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
       username: '',
       password: '',
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleBtnClick = this.handleBtnClick.bind(this);
@@ -40,8 +40,8 @@ class Login extends React.Component {
       }).catch(err => console.log(err));
   }
 
-	render() {
-		return (
+  render() {
+    return (
       <article>
         <MetaDefault />
         <div className='login-wrapper'>
@@ -71,8 +71,7 @@ class Login extends React.Component {
           </Card>
         </div>
       </article>);
-	}
-
+  }
 }
 
 export default withRouter(Login);

@@ -4,7 +4,7 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
@@ -14,13 +14,13 @@ import Users from './Admin/Users.jsx';
 import * as PagesService from '../../services/pages-service';
 
 class Admin extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
       pages: [],
       activeTab: '1',
-    }
+    };
   }
 
   componentDidMount() {
@@ -45,14 +45,14 @@ class Admin extends React.Component {
     }
   }
 
-	render() {
-		return (
+  render() {
+    return (
       <article>
         <MetaDefault />
         <Nav tabs>
           <NavItem>
             <NavLink
-              className={this.state.activeTab === '1' ? 'active': '' }
+              className={this.state.activeTab === '1' ? 'active' : '' }
               onClick={() => { this.toggle('1'); }}
             >
             Usarios
@@ -60,7 +60,7 @@ class Admin extends React.Component {
           </NavItem>
           <NavItem>
             <NavLink
-              className={this.state.activeTab === '2' ? 'active': '' }
+              className={this.state.activeTab === '2' ? 'active' : '' }
               onClick={() => { this.toggle('2'); }}
             >
             Páginas
@@ -81,8 +81,7 @@ class Admin extends React.Component {
           </TabPane>
         </TabContent>
       </article>);
-	}
-
+  }
 }
 
 export default withRouter(Admin);

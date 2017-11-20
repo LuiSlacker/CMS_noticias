@@ -4,18 +4,18 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
-import * as NoticesService from '../../../services/notices-service';
-import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
+import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
 import TinyMCE from 'react-tinymce';
-import * as UserService from '../../../services/user-service';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import * as UserService from '../../../services/user-service';
+import * as NoticesService from '../../../services/notices-service';
 
 class User extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -24,7 +24,7 @@ class User extends React.Component {
       newUserEmail: '',
       selectedPages: [],
       selectedUser: '',
-    }
+    };
   }
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class User extends React.Component {
       .then(users => this.setState({ users }));
   }
 
-  persistNewUser(evt) {
+  persistNewUser() {
     UserService.createNewUser(this.state.newUsername, this.state.newUserEmail)
       .then()
       .catch(console.error);
@@ -47,19 +47,19 @@ class User extends React.Component {
   updateUserData() {
     UserService.updateAssignedPages(this.state.selectedUser, this.state.selectedPages)
       .then(() => NotificationManager.success('Pagina guardado con éxito', 'Exito'))
-      .catch(() => NotificationManager.error(err.response.data.Error.message, 'Error al guardar'));
+      .catch(err => NotificationManager.error(err.response.data.Error.message, 'Error al guardar'));
   }
 
   handleTableUserClick(userId) {
     UserService.fetchAssignedPageIds(userId)
-      .then((assignedPages) => this.setState({
+      .then(assignedPages => this.setState({
         selectedPages: assignedPages,
         selectedUser: userId,
       }));
   }
 
-	render() {
-		return (
+  render() {
+    return (
       <div>
         <Row>
           <Col sm='6'>
@@ -74,12 +74,12 @@ class User extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.users.map((user, index)  =>
+                {this.state.users.map((user, index) =>
                   <tr key={index} onClick={() => this.handleTableUserClick.bind(this)(user._id)}>
-                    <td>{index +1}</td>
+                    <td>{index + 1}</td>
                     <td>{user.username}</td>
                     <td>{user.email}</td>
-                    <td>{user.isEditor ? 'Editor': 'Admin'}</td>
+                    <td>{user.isEditor ? 'Editor' : 'Admin'}</td>
                     <td>false</td>
                   </tr>)}
               </tbody>
@@ -87,7 +87,7 @@ class User extends React.Component {
           </Col>
           <Col sm='6'>
             {this.state.selectedUser !== ''
-            ? <div>
+              ? <div>
                 <FormGroup>
                   <Select
                     multi={true}
@@ -99,7 +99,7 @@ class User extends React.Component {
                 </FormGroup>
                 <Button onClick={this.updateUserData.bind(this)}>Update</Button>
               </div>
-            : 'Select a user to assign pages.'
+              : 'Select a user to assign pages.'
             }
           </Col>
         </Row>
@@ -130,8 +130,7 @@ class User extends React.Component {
           </Col>
         </Row>
       </div>);
-	}
-
+  }
 }
 
 export default withRouter(User);

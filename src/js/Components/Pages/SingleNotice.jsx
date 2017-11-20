@@ -4,7 +4,7 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
 import * as NoticeService from '../../services/notices-service';
 import SocialShare from '../Layout/SocialShare.jsx';
@@ -12,12 +12,12 @@ import Comments from '../Layout/Comments.jsx';
 import MetaTags from 'react-meta-tags';
 
 class SingleNoticia extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
       notice: {},
-    }
+    };
   }
 
   componentDidMount() {
@@ -25,16 +25,16 @@ class SingleNoticia extends React.Component {
       .then(notice => this.setState({ notice }));
   }
 
-  setContent(){
-    return {__html: unescape(this.state.notice.text)};
+  setContent() {
+    return { __html: unescape(this.state.notice.text) };
   }
 
-	render() {
-		return (
+  render() {
+    return (
       <article>
         <MetaTags>
-            <title>{this.state.notice.title}</title>
-            <meta name="description" content={this.state.notice.summary} />
+          <title>{this.state.notice.title}</title>
+          <meta name="description" content={this.state.notice.summary} />
         </MetaTags>
         <div>
           <ol className="breadcrumb">
@@ -46,14 +46,14 @@ class SingleNoticia extends React.Component {
         </div>
 
         <div className="row">
-            <div className="col-lg-6">
-              <img className="img-fluid rounded mb-4" src={this.state.notice.imageUrl} alt="Noticia Image" />
-              <SocialShare notice={this.state.notice}/>
-            </div>
-            <div className="col-lg-6">
-              <h2>{this.state.notice.title}</h2>
-              <div dangerouslySetInnerHTML={this.setContent()} />
-            </div>
+          <div className="col-lg-6">
+            <img className="img-fluid rounded mb-4" src={this.state.notice.imageUrl} alt="Noticia Image" />
+            <SocialShare notice={this.state.notice}/>
+          </div>
+          <div className="col-lg-6">
+            <h2>{this.state.notice.title}</h2>
+            <div dangerouslySetInnerHTML={this.setContent()} />
+          </div>
         </div>
 
         <div className="pollBox">
@@ -61,8 +61,7 @@ class SingleNoticia extends React.Component {
         </div>
 
       </article>);
-	}
-
+  }
 }
 
 export default withRouter(SingleNoticia);

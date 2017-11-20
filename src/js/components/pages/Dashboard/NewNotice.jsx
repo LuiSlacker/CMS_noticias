@@ -4,16 +4,16 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
-import * as NoticesService from '../../../services/notices-service';
+import TinyMCE from 'react-tinymce';
 import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
-import TinyMCE from 'react-tinymce';
 import * as UserService from '../../../services/user-service';
+import * as NoticesService from '../../../services/notices-service';
 
 class NewNotice extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -23,7 +23,7 @@ class NewNotice extends React.Component {
       noticiaText: '',
       imageUrl: '',
       selectedPageId: '',
-    }
+    };
   }
 
   componentDidMount() {
@@ -58,16 +58,16 @@ class NewNotice extends React.Component {
         noticiaTitle: '',
         noticiaSummary: '',
         noticiaText: '',
-        imageUrl:'',
+        imageUrl: '',
         selectedPageId: '',
-      })
+      });
       this.props.updateNoticeList();
       this.props.setActiveTab('2');
     }).catch(err => NotificationManager.error(err.response.data.Error.message, 'Error al guardar'));
   }
 
-	render() {
-		return (
+  render() {
+    return (
       <div>
         <h5>Crear nueva noticia</h5>
         <Form>
@@ -117,15 +117,13 @@ class NewNotice extends React.Component {
             <Label for="pagesSelect">Página</Label>
             <Input type="select" name="selectedPage" id="pagesSelect" onChange={this.handleSelectChange.bind(this)}>
               {this.state.pages.map((page, index) =>
-                <option key={index} value={page._id}>{page.name}</option>
-              )}
+                <option key={index} value={page._id}>{page.name}</option>)}
             </Input>
           </FormGroup>
           <Button onClick={this.handleBtnClick.bind(this)}>Submit</Button>
         </Form>
-    </div>);
-	}
-
+      </div>);
+  }
 }
 
 export default withRouter(NewNotice);
