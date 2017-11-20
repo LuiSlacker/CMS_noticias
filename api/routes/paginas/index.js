@@ -15,8 +15,9 @@ paginasRouter.route('/:id')
   .put(controller.put)
   .delete(controller.delete);
 
-// include notices subrouter
+// include notices and poll subrouter
 paginasRouter.use('/:id/notices', require('./notices'));
+paginasRouter.use('/:id/poll', require('./poll'));
 
 module.exports = paginasRouter;
 

@@ -11,7 +11,17 @@ export function persistOne(name) {
     .catch(console.error);
 };
 
-// export function getOneById(pageId, noticesId) {
-//   return axios.get(`/api/paginas/${pageId}/notices/${noticesId}`)
-//     .then(response => response.data);
-// };
+export function persistNewPoll(pageId, poll) {
+  return axios.post(`/api/paginas/${pageId}/poll`, poll)
+    .catch(console.error);
+};
+
+export function getPoll(pageId) {
+  return axios.get(`/api/paginas/${pageId}/poll`)
+    .then(response => response.data)
+    .catch(console.error);
+};
+
+export function votePoll(pageId, optionId) {
+  return axios.put(`/api/paginas/${pageId}/poll`, { selectedOption: optionId });
+};

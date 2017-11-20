@@ -1,6 +1,8 @@
 import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col, FormGroup, Input, Label } from 'reactstrap';
 import classnames from 'classnames';
+import { NotificationManager } from 'react-notifications';
+import * as PagesService from '../../services/pages-service';
 
 export default class Poll extends React.Component {
   constructor(props) {
@@ -8,20 +10,26 @@ export default class Poll extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: '1'
+      activeTab: '1',
+      selectedOption: this.props.poll.options[0]._id,
     };
   }
 
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
-        activeTab: tab
+        activeTab: tab,
       });
     }
   }
 
-  handleClick(){
-    //Send Poll form
+  handleClick(evt){
+    evt.preventDefault();
+    PagesService.votePoll(this.props.activePage, this.state.selectedOption)
+      .then(() => {
+        NotificationManager.success('Vote submitted successfully!', 'Success');
+        this.props.fetchPoll();
+      }).catch(() => NotificationManager.error('Failed submitting vote!', 'Error'));
   }
 
   render() {
@@ -51,19 +59,21 @@ export default class Poll extends React.Component {
               <Col sm="12">
                 <FormGroup tag="fieldset" row>
                   <Col>
-                    <h5> Poll Question </h5>
-                    <FormGroup check>
-                      <Label check>
-                        <Input type="radio" name="radio2" />
-                        Option one is this and that—be sure to include why it's great
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check>
-                      <Label check>
-                        <Input type="radio" name="radio2" />
-                        Option two can be something else and selecting it will deselect option one
-                      </Label>
-                    </FormGroup>
+                    <h5>{this.props.poll.title}</h5>
+                    <p>{this.props.poll.question}</p>
+                    {this.props.poll.options.map((option, index) =>
+                      <FormGroup key={index} check>
+                        <Label check>
+                          <Input
+                            type="radio"
+                            value={option._id}
+                            checked={this.state.selectedOption === option._id}
+                            onChange={evt => this.setState({ selectedOption: evt.target.value })}
+                          />
+                          {option.name}
+                        </Label>
+                      </FormGroup>
+                    )}
                     <Button onClick={this.handleClick.bind(this)}>Submit</Button>
                   </Col>
                 </FormGroup>
@@ -76,11 +86,12 @@ export default class Poll extends React.Component {
               <FormGroup tag="fieldset" row>
                 <Col>
                   <h5> Results </h5>
-                  <h6> Option one is this and that—be sure to include why it's great </h6> 
-                  <p><strong> 200 votes </strong></p>
-                  <h6> Option two can be something else and selecting it will deselect option one </h6> 
-                  <p><strong> 300 votes </strong></p>
-                  <h5> Total: 500 votes </h5>
+                  {this.props.poll.options.map((option, index) =>
+                    <div>
+                      <h6>{option.name}</h6>
+                      <p><strong>{option.votes} votes</strong></p>
+                    </div>
+                  )}
                 </Col>
               </FormGroup>
             </Col>

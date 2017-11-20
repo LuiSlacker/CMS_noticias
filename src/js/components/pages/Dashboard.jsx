@@ -81,7 +81,9 @@ class Dashboard extends React.Component {
             <NoticeList user={this.props.user} notices={this.state.notices} />
           </TabPane>
           <TabPane tabId='3'>
-            <NewPoll notices={this.state.notices} />
+            <NewPoll
+              user={this.props.user}
+              notices={this.state.notices} />
           </TabPane>
         </TabContent>
       </article>);

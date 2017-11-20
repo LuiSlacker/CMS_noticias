@@ -21,6 +21,8 @@ class Home extends React.Component {
     this.state =  {
       pages: [],
       notices: [],
+      poll: {},
+      activePage: ""
     }
 
     this.toggle = this.toggle.bind(this);
@@ -28,20 +30,34 @@ class Home extends React.Component {
 
   componentDidMount() {
     PagesService.getAll()
-      .then(pages => {
-        NoticeService.getAllForOnePage(pages[0]._id)
-        .then(notices => this.setState({
+      .then(pages => Promise.all([
+        pages,
+        NoticeService.getAllForOnePage(pages[0]._id),
+        this.fetchPoll.bind(this)(pages[0]._id),
+      ]))
+      .then(([pages, notices]) => this.setState({
           pages,
           notices,
           activePage: pages[0]._id,
-        }));
-      });
+      }));
+  }
+
+  fetchPoll(pageId) {
+    PagesService.getPoll(pageId || this.state.activePage)
+      .then(poll => this.setState({ poll }))
+      .catch(console.error);
   }
 
   toggle(activePage) {
     if (this.state.activePage !== activePage) {
-      NoticeService.getAllForOnePage(activePage)
-        .then(notices => this.setState({ notices, activePage }));
+      Promise.all([
+        NoticeService.getAllForOnePage(activePage),
+        PagesService.getPoll(activePage),
+      ]).then(([notices, poll]) => this.setState({
+          notices,
+          activePage,
+          poll,
+      }));
     }
   }
 
@@ -82,9 +98,14 @@ class Home extends React.Component {
                       </div>)
                   : <Col><div>This Page does not include noticias!</div></Col>}
                 </Row>
-                <div className="pollBox">
-                  <Poll/>
-                </div>
+                {this.state.poll.question !== undefined &&
+                  <div className="pollBox">
+                    <Poll
+                      poll={this.state.poll}
+                      activePage={this.state.activePage}
+                      fetchPoll={this.fetchPoll.bind(this)}/>
+                  </div>
+                }
               </TabPane>
             )}
           </TabContent>

@@ -9,12 +9,26 @@ const PaginaModel = new Schema({
     required: true,
     unique: true,
   },
-  // poll: {
-  //   question: {
-  //     type: String,
-  //   },
-  //   options: [{ type: String }],
-  // },
+  poll: {
+    title: {
+      type: String,
+      required: true,
+    },
+    question: {
+      type: String,
+      required: true,
+    },
+    options: {
+      type: [{
+        name: String,
+        votes: {
+          type: Number,
+          default: 0,
+        },
+      }],
+      required: true,
+    },
+  },
   notices: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notice' }],
 }, {
   timestamps: true,

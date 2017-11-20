@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
 import update from 'immutability-helper';
+import * as UserService from '../../../services/user-service';
+import * as PagesService from '../../../services/pages-service';
+import _ from 'lodash';
 
 class NewPoll extends Component {
 
@@ -12,8 +15,19 @@ class NewPoll extends Component {
       title: '',
       question: '',
       answers: [],
+      selectedPageId: '',
+      pages: [],
     };
 
+  }
+
+  componentDidMount() {
+    UserService.fetchAssignedPages(this.props.user._id)
+    .then(assignedPages => assignedPages.filter(page => !_.isEmpty(page.poll.options)))
+    .then(assignedPages => this.setState({
+      pages: assignedPages,
+      selectedPageId: assignedPages[0]? assignedPages[0]._id: "",
+    }));
   }
 
   handleChange(e) {
@@ -22,8 +36,18 @@ class NewPoll extends Component {
     });
   }
 
-  handleBtnClick(evt) {
+  handleSelectChange(select) {
+    this.setState({ selectedPageId: select.currentTarget.selectedOptions[0].value })
+  }
+
+  async handleBtnClick(evt) {
     evt.preventDefault();
+    await PagesService.persistNewPoll(this.state.selectedPageId, {
+      title: this.state.title,
+      question: this.state.question,
+      options: this.state.answers,
+    });
+    NotificationManager.success('New poll saved successfully!', 'Success');
   }
 
   addAnswer() {
@@ -75,6 +99,14 @@ class NewPoll extends Component {
               name='question'
               id="question"
               placeholder="poll question" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="pagesSelect">Page</Label>
+            <Input type="select" name="selectedPage" id="pagesSelect" onChange={this.handleSelectChange.bind(this)}>
+              {this.state.pages.map((page, index) =>
+                <option key={index} value={page._id}>{page.name}</option>
+              )}
+            </Input>
           </FormGroup>
           {this.state.answers.map((answer, index) =>
             <FormGroup key={index}>

@@ -35,7 +35,7 @@ exports.updateAssignedPages = (req, res, next) => {
 };
 
 exports.fetchAssignedPages = (req, res, next) => {
-  req.user.populate('assignedPages', '_id, name', (err, user) => {
+  req.user.populate('assignedPages', '_id poll name', (err, user) => {
     if (err) return next(err);
     res.json(user.assignedPages);
   });
