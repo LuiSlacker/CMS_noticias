@@ -28,7 +28,10 @@ exports.all = (req, res, next) => {
 };
 
 exports.get = (req, res, next) => {
-  res.json(req.notice);
+  req.notice.populate('user', 'username', (err, populatedNotice) => {
+    if (err) return next(new Error(err));
+    res.json(populatedNotice);
+  });
 };
 
 exports.post = (req, res, next) => {

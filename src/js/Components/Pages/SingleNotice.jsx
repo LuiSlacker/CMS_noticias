@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import MetaTags from 'react-meta-tags';
+import moment from 'moment';
 import SocialShare from '../layout/SocialShare.jsx';
 import Comments from '../layout/Comments.jsx';
 import * as NoticeService from '../../services/notices-service';
@@ -46,6 +47,8 @@ class SingleNoticia extends React.Component {
           </div>
           <div className="col-lg-6">
             <h2>{this.state.notice.title}</h2>
+            <div style={{ 'text-align': 'right' }}>{moment(this.state.notice.createdAt).format('MMM Do YYYY')}</div>
+            by {this.state.notice.user && this.state.notice.user.username}
             <div dangerouslySetInnerHTML={this.setContent()} />
           </div>
         </div>
