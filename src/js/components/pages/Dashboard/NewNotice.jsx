@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import TinyMCE from 'react-tinymce';
 import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';

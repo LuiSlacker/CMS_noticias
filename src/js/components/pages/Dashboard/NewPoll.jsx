@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
+import _ from 'lodash';
 import update from 'immutability-helper';
 import * as UserService from '../../../services/user-service';
 import * as PagesService from '../../../services/pages-service';
-import _ from 'lodash';
 
 class NewPoll extends Component {
-
   constructor(props) {
     super(props);
 
@@ -18,16 +17,15 @@ class NewPoll extends Component {
       selectedPageId: '',
       pages: [],
     };
-
   }
 
   componentDidMount() {
     UserService.fetchAssignedPages(this.props.user._id)
-    .then(assignedPages => assignedPages.filter(page => !_.isEmpty(page.poll.options)))
-    .then(assignedPages => this.setState({
-      pages: assignedPages,
-      selectedPageId: assignedPages[0]? assignedPages[0]._id: "",
-    }));
+      .then(assignedPages => assignedPages.filter(page => !_.isEmpty(page.poll.options)))
+      .then(assignedPages => this.setState({
+        pages: assignedPages,
+        selectedPageId: assignedPages[0] ? assignedPages[0]._id : '',
+      }));
   }
 
   handleChange(e) {
@@ -104,29 +102,26 @@ class NewPoll extends Component {
             <Label for="pagesSelect">Page</Label>
             <Input type="select" name="selectedPage" id="pagesSelect" onChange={this.handleSelectChange.bind(this)}>
               {this.state.pages.map((page, index) =>
-                <option key={index} value={page._id}>{page.name}</option>
-              )}
+                <option key={index} value={page._id}>{page.name}</option>)}
             </Input>
           </FormGroup>
           {this.state.answers.map((answer, index) =>
             <FormGroup key={index}>
               <Input
-              type="text"
-              value={answer.name}
-              onChange={evt => this.onAnswerNameUpdate.bind(this)(evt, index)}
-              name='answer'
-              id="answer"
-              placeholder="answer" />
+                type="text"
+                value={answer.name}
+                onChange={evt => this.onAnswerNameUpdate.bind(this)(evt, index)}
+                name='answer'
+                id="answer"
+                placeholder="answer" />
               <Button color="danger" onClick={() => this.deleteAnswer.bind(this)(index)}>Delete</Button>
-            </FormGroup>
-          )}
+            </FormGroup>)}
           <Button outline onClick={this.addAnswer.bind(this)}>Add possible answer</Button>
           <Button onClick={this.handleBtnClick.bind(this)}>Submit</Button>
         </Form>
       </div>
     );
   }
-
 }
 
 export default NewPoll;

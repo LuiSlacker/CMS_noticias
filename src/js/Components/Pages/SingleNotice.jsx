@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
-import * as NoticeService from '../../services/notices-service';
-import SocialShare from '../Layout/SocialShare.jsx';
-import Comments from '../Layout/Comments.jsx';
+import { Link, withRouter } from 'react-router-dom';
 import MetaTags from 'react-meta-tags';
+import SocialShare from '../layout/SocialShare.jsx';
+import Comments from '../layout/Comments.jsx';
+import * as NoticeService from '../../services/notices-service';
 
 class SingleNoticia extends React.Component {
   constructor(props) {

@@ -1,17 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
-
-import {
-  ShareButtons,
-  ShareCounts,
-  generateShareIcon,
-} from 'react-share';
+import { ShareButtons, generateShareIcon } from 'react-share';
 
 const {
   FacebookShareButton,
@@ -46,5 +34,5 @@ class SocialShare extends React.Component {
   }
 }
 
-export default withRouter(SocialShare);
+export default SocialShare;
 

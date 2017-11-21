@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
-import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText, FormGroup, Label, Input } from 'reactstrap';
+import { Card, Button, CardHeader, CardBody, FormGroup, Label, Input } from 'reactstrap';
 import MetaDefault from '../helper/meta.jsx';
 import * as UserService from '../../services/user-service';
 
@@ -37,7 +31,7 @@ class Signup extends React.Component {
       .then((user) => {
         this.props.setUser(user);
         this.props.history.push('/');
-        NotificationManager.success('Signed up con éxito', 'Èxito')
+        NotificationManager.success('Signed up successfully.', 'Success');
       }).catch(err => console.log(err));
   }
 

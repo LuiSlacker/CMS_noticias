@@ -5,10 +5,7 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Card,
   Button,
-  CardTitle,
-  CardText,
   Row,
   Col,
   FormGroup,
@@ -100,7 +97,7 @@ export default class Poll extends React.Component {
                   <Col>
                     <h5> Results </h5>
                     {this.props.poll.options.map((option, index) =>
-                      <div>
+                      <div key={index}>
                         <h6>{option.name}</h6>
                         <p><strong>{option.votes} votes</strong></p>
                       </div>)}

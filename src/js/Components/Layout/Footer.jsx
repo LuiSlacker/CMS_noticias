@@ -1,14 +1,8 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Footer extends React.Component {
-  ender() {
+  render() {
     return (
       <footer className="py-1 bg-dark">
         <div className="footer-container">

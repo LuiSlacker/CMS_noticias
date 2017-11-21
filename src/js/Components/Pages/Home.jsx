@@ -1,14 +1,8 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Link, withRouter } from 'react-router-dom';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import MetaDefault from '../helper/meta.jsx';
-import Poll from '../Layout/Poll.jsx';
+import Poll from '../layout/Poll.jsx';
 import * as NoticeService from '../../services/notices-service';
 import * as PagesService from '../../services/pages-service';
 

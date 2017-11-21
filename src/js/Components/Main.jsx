@@ -1,12 +1,7 @@
 
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { NotificationContainer } from 'react-notifications';
 
 import Header from './layout/Header.jsx';
 import Footer from './layout/Footer.jsx';
@@ -18,61 +13,59 @@ import About from './pages/About.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Signup from './pages/Signup.jsx';
 import Login from './pages/Login.jsx';
-import { NotificationContainer } from 'react-notifications';
 
 class Main extends React.Component {
-
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       isAuthenticated: false,
       user: {},
-    }
+    };
   }
 
   setUser(user) {
     this.setState({
       user,
       isAuthenticated: true,
-    })
+    });
   }
 
-	render() {
-		return (<main>
-		<Router>
-			<div>
-        <Header user={this.state.user}/>
-				<div className='container main-container'>
-					<Route path="/" exact component={Home}/>
-          <Route path="/paginas/:pageUid/noticias/:noticeUid" component={SingleNotice}/>
+  render() {
+    return (<main>
+      <Router>
+        <div>
+          <Header user={this.state.user}/>
+          <div className='container main-container'>
+            <Route path="/" exact component={Home}/>
+            <Route path="/paginas/:pageUid/noticias/:noticeUid" component={SingleNotice}/>
 
-          <Route
-            path="/signup"
-            exact
-            render= {props => <Signup setUser={this.setUser.bind(this)} /> }
-          />
-          <Route
-            path="/login"
-            exact
-            render= {props => <Login setUser={this.setUser.bind(this)} /> }
-          />
+            <Route
+              path="/signup"
+              exact
+              render= {props => <Signup setUser={this.setUser.bind(this)} /> }
+            />
+            <Route
+              path="/login"
+              exact
+              render= {props => <Login setUser={this.setUser.bind(this)} /> }
+            />
 
-          <Route path="/admin" exact component={Admin}/>
-          <Route
-            path="/dashboard"
-            exact
-            render= {props => <Dashboard user={this.state.user} /> }
-          />
-          <Route path="/about" exact component={About}/>
-				</div>
-        <Footer />
-			</div>
-		</Router>
+            <Route path="/admin" exact component={Admin}/>
+            <Route
+              path="/dashboard"
+              exact
+              render= {props => <Dashboard user={this.state.user} /> }
+            />
+            <Route path="/about" exact component={About}/>
+          </div>
+          <Footer />
+        </div>
+      </Router>
 
-    <NotificationContainer />
-		</main>);
-	}
+      <NotificationContainer />
+    </main>);
+  }
 }
 
 export default Main;

@@ -1,14 +1,8 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
-import * as UserService from '../../services/user-service';
-import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText, FormGroup, Label, Input } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
+import { Card, Button, CardHeader, CardBody, FormGroup, Label, Input } from 'reactstrap';
+import * as UserService from '../../services/user-service';
 import MetaDefault from '../helper/meta.jsx';
 
 class Login extends React.Component {
@@ -34,7 +28,7 @@ class Login extends React.Component {
     evt.preventDefault();
     UserService.login(this.state.username, this.state.password)
       .then((user) => {
-        NotificationManager.success('Logged in con éxito', 'Éxito');
+        NotificationManager.success('Logged in successfully!', 'Success');
         this.props.setUser(user);
         this.props.history.push('/');
       }).catch(err => console.log(err));

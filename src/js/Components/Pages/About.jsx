@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Media } from 'reactstrap';
 import MetaDefault from '../helper/meta.jsx';
 

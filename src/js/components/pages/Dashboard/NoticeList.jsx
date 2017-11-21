@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
 import * as NoticesService from '../../../services/notices-service';
 
 class NoticeList extends React.Component {
-
   handleSetNoticeState(evt, notice) {
     notice.active = evt.currentTarget.selectedOptions[0].value;
     evt.currentTarget.value = notice.active;

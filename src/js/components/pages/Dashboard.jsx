@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
-
-import { Form, FormGroup, Label, Input, Table, TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import MetaDefault from '../helper/meta.jsx';
 import NewNotice from './Dashboard/NewNotice.jsx';
 import NoticeList from './Dashboard/NoticeList.jsx';

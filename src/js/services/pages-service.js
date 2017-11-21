@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export function getAll() {
   return axios.get('/api/paginas/')
     .then(response => response.data);

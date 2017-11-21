@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col } from 'reactstrap';
-import { NotificationManager } from 'react-notifications';
+import { withRouter } from 'react-router-dom';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import MetaDefault from '../helper/meta.jsx';
 import Pages from './Admin/Pages.jsx';
 import Users from './Admin/Users.jsx';

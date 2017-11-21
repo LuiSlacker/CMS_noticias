@@ -1,18 +1,10 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
 import { Form, FormGroup, Label, Input, Table, Button, Row, Col } from 'reactstrap';
-import TinyMCE from 'react-tinymce';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import * as UserService from '../../../services/user-service';
-import * as NoticesService from '../../../services/notices-service';
 
 class User extends React.Component {
   constructor(props) {
