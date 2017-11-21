@@ -1,5 +1,19 @@
 import React from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col, FormGroup, Input, Label } from 'reactstrap';
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Card,
+  Button,
+  CardTitle,
+  CardText,
+  Row,
+  Col,
+  FormGroup,
+  Input,
+  Label } from 'reactstrap';
 import classnames from 'classnames';
 import { NotificationManager } from 'react-notifications';
 import * as PagesService from '../../services/pages-service';
@@ -23,7 +37,7 @@ export default class Poll extends React.Component {
     }
   }
 
-  handleClick(evt){
+  handleClick(evt) {
     evt.preventDefault();
     PagesService.votePoll(this.props.activePage, this.state.selectedOption)
       .then(() => {
@@ -72,8 +86,7 @@ export default class Poll extends React.Component {
                           />
                           {option.name}
                         </Label>
-                      </FormGroup>
-                    )}
+                      </FormGroup>)}
                     <Button onClick={this.handleClick.bind(this)}>Submit</Button>
                   </Col>
                 </FormGroup>
@@ -81,21 +94,20 @@ export default class Poll extends React.Component {
             </Row>
           </TabPane>
           <TabPane tabId="2">
-          <Row>
-            <Col sm="12">
-              <FormGroup tag="fieldset" row>
-                <Col>
-                  <h5> Results </h5>
-                  {this.props.poll.options.map((option, index) =>
-                    <div>
-                      <h6>{option.name}</h6>
-                      <p><strong>{option.votes} votes</strong></p>
-                    </div>
-                  )}
-                </Col>
-              </FormGroup>
-            </Col>
-          </Row>
+            <Row>
+              <Col sm="12">
+                <FormGroup tag="fieldset" row>
+                  <Col>
+                    <h5> Results </h5>
+                    {this.props.poll.options.map((option, index) =>
+                      <div>
+                        <h6>{option.name}</h6>
+                        <p><strong>{option.votes} votes</strong></p>
+                      </div>)}
+                  </Col>
+                </FormGroup>
+              </Col>
+            </Row>
           </TabPane>
         </TabContent>
       </div>

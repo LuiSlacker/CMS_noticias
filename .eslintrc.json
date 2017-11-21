@@ -6,12 +6,15 @@
       "jsx": true
     }
   },
-  "extends": "airbnb-base",
+  "extends": ["eslint:recommended", "plugin:react/recommended", "airbnb-base"],
   "root": true,
+  "plugins": [
+    "react"
+  ],
   "rules": {
+    "react/jsx-uses-vars": 2,
     "indent": ["error", 2],
     "prefer-arrow-callback": ["error", { "allowNamedFunctions": true }],
-
     "array-callback-return": 0,
     "consistent-return": 0,
     "import/newline-after-import": 0,

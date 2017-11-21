@@ -1,27 +1,20 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter
-} from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
 import { Media, FormGroup, Label, Input, Card, CardBody, Button } from 'reactstrap';
 import * as NoticesService from '../../services/notices-service';
-import { NotificationManager } from 'react-notifications';
 
 class Comments extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
       comments: [],
       comment: '',
       name: '',
-    }
+    };
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.noticeId != undefined) this.fetchAllComments.bind(this)(nextProps.noticeId);
+    if (nextProps.noticeId !== undefined) this.fetchAllComments.bind(this)(nextProps.noticeId);
   }
 
   fetchAllComments(noticeId) {
@@ -47,50 +40,48 @@ class Comments extends React.Component {
     }).catch(() => NotificationManager.error('Failed to save comment', 'Error'));
   }
 
-	render() {
-      return (
+  render() {
+    return (
       <div className="commentsBox">
-      <h3>Comments</h3>
-      <div className="comments">
-        {this.state.comments.map((comment, index) =>
-              <Media className="comment" key={index}>
-                <Media body>
-                  <Media heading>
-                    <strong>{comment.author}</strong>
-                  </Media>
-                  <p>{comment.content}</p>
+        <h3>Comments</h3>
+        <div className="comments">
+          {this.state.comments.map((comment, index) =>
+            <Media className="comment" key={index}>
+              <Media body>
+                <Media heading>
+                  <strong>{comment.author}</strong>
                 </Media>
+                <p>{comment.content}</p>
               </Media>
-        )}
-      </div>
+            </Media>)}
+        </div>
 
-          <br/>
-          <Card>
-            <CardBody>
-              <FormGroup>
-                <Label for="name">Your name:</Label>
-                <Input
-                  type="text"
-                  value={this.state.name}
-                  onChange={this.handleChange.bind(this)}
-                  id="name"
-                  name="name"/>
-              </FormGroup>
-              <FormGroup>
-                <Label for="comment">Say something!</Label>
-                <Input
-                  type="text"
-                  value={this.state.comment}
-                  onChange={this.handleChange.bind(this)}
-                  id="comment"
-                  name="comment"/>
-              </FormGroup>
-              <Button onClick={this.handleClick.bind(this)}>Submit</Button>
-            </CardBody>
-          </Card>
+        <br/>
+        <Card>
+          <CardBody>
+            <FormGroup>
+              <Label for="name">Your name:</Label>
+              <Input
+                type="text"
+                value={this.state.name}
+                onChange={this.handleChange.bind(this)}
+                id="name"
+                name="name"/>
+            </FormGroup>
+            <FormGroup>
+              <Label for="comment">Say something!</Label>
+              <Input
+                type="text"
+                value={this.state.comment}
+                onChange={this.handleChange.bind(this)}
+                id="comment"
+                name="comment"/>
+            </FormGroup>
+            <Button onClick={this.handleClick.bind(this)}>Submit</Button>
+          </CardBody>
+        </Card>
       </div>);
-	}
-
+  }
 }
 
 export default Comments;
