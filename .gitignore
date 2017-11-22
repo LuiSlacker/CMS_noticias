@@ -6,7 +6,7 @@ npm-debug.log.*
 
 config/config.js
 dist
-public/js
+
 logs
 
 .DS_Store
