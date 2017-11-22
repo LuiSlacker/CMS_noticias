@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bluebird = require('bluebird');
-const config = require('./config/config');
 const path = require('path');
 // const passport = require('passport');
 const cookieParser = require('cookie-parser');

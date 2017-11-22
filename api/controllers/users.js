@@ -1,6 +1,5 @@
 const User = require('../models/user');
 const Mailer = require('../../lib/mailer');
-const config = require('../../config/config');
 const Jwt = require('jsonwebtoken');
 const log = require('../../lib/logger');
 const bcrypt = require('bcrypt');
@@ -60,7 +59,7 @@ exports.create = (req, res, next) => {
         id: user._id,
       };
 
-      const token = Jwt.sign(tokenData, config.jwt.privateKey);
+      const token = Jwt.sign(tokenData, process.env.JWT_PRIVATE);
       log.info(token);
 
       const mailOptions = {
@@ -130,7 +129,7 @@ exports.login = (req, res, next) => {
         updatedAt: user.updatedAt,
         _id: user._id,
       };
-      const token = Jwt.sign(userData, config.jwt.privateKey);
+      const token = Jwt.sign(userData, process.env.JWT_PRIVATE);
       res.cookie('user_token', token, { maxAge: 1000 * 60 * 30 });
       res.json({
         success: true,

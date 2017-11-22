@@ -1,5 +1,4 @@
 const Jwt = require('jsonwebtoken');
-const config = require('../config/config');
 const Boom = require('boom');
 
 module.exports = class Utils {
@@ -21,7 +20,7 @@ module.exports = class Utils {
   static verifyToken(token, cb) {
     Jwt.verify(
       token,
-      config.jwt.privateKey,
+      process.env.JWT_PRIVATE,
       (err, decoded) => {
         if (err) return cb(new Error({ success: false, message: 'Failed to authenticate token.', err }), null);
         cb(null, decoded);
