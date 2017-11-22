@@ -5,6 +5,7 @@ const log = require('../../lib/logger');
 const bcrypt = require('bcrypt');
 const Utils = require('../Utils');
 const SALT_ROUNDS = 10;
+const Boom = require('boom');
 
 exports.params = (req, res, next, id) => {
   User.findById(id)
@@ -129,7 +130,8 @@ exports.login = (req, res, next) => {
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) return next(err);
 
-    if (!user) return next(new Error({ success: false, message: 'Authentication failed. User not found.' }));
+    if (!user) return next(Boom.unauthorized('Authentication failed. User not found.'));
+    if (!user.isActive) return next(Boom.unauthorized('Authentication failed. User not active.'));
     if (bcrypt.compareSync(req.body.password, user.password)) {
       const userData = {
         username: user.username,
@@ -138,6 +140,8 @@ exports.login = (req, res, next) => {
         isEditor: user.isEditor,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
+        isVerified: user.isVerified,
+        isActive: user.isActive,
         _id: user._id,
       };
       const token = Jwt.sign(userData, process.env.JWT_PRIVATE);
@@ -147,11 +151,19 @@ exports.login = (req, res, next) => {
         message: 'Access granted',
         user: userData,
       });
-    } else return next(new Error({ success: false, message: 'Authentication failed. Wrong password.' }));
+    } else return next(Boom.unauthorized('Authentication failed. Wrong password.'));
   });
 };
 
 exports.logout = (req, res, next) => {
   res.clearCookie('user_token');
   res.redirect('/');
+};
+
+exports.toggleUserState = (req, res, next) => {
+  req.user.isActive = !req.user.isActive;
+  req.user
+    .save()
+    .then(user => res.json(user))
+    .catch(next);
 };

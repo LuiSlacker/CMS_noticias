@@ -11791,6 +11791,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (immutable) */ __webpack_exports__["signup"] = signup;
 /* harmony export (immutable) */ __webpack_exports__["forgotPassword"] = forgotPassword;
 /* harmony export (immutable) */ __webpack_exports__["logout"] = logout;
+/* harmony export (immutable) */ __webpack_exports__["toggleUserState"] = toggleUserState;
 /* harmony export (immutable) */ __webpack_exports__["createNewUser"] = createNewUser;
 /* harmony export (immutable) */ __webpack_exports__["getAll"] = getAll;
 /* harmony export (immutable) */ __webpack_exports__["updateAssignedPages"] = updateAssignedPages;
@@ -11820,6 +11821,12 @@ function logout() {
   return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/users/logout')
     .catch(console.error);
 }
+
+function toggleUserState(userId) {
+  return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete(`/api/users/${userId}`)
+    .catch(console.error);
+}
+
 
 function createNewUser(username, email) {
   return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/users/create', { username, email })
@@ -66613,6 +66620,11 @@ var User = function (_React$Component) {
   _createClass(User, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.fetchUsers.bind(this)();
+    }
+  }, {
+    key: 'fetchUsers',
+    value: function fetchUsers() {
       var _this2 = this;
 
       UserService.getAll().then(function (users) {
@@ -66630,6 +66642,7 @@ var User = function (_React$Component) {
           newUserEmail: ''
         });
         _reactNotifications.NotificationManager.success('User saved successfully', 'Success');
+        _this3.fetchUsers.bind(_this3)();
       }).catch(console.error);
     }
   }, {
@@ -66641,7 +66654,7 @@ var User = function (_React$Component) {
     key: 'updateUserData',
     value: function updateUserData() {
       UserService.updateAssignedPages(this.state.selectedUser, this.state.selectedPages).then(function () {
-        return _reactNotifications.NotificationManager.success('Page saved successfully', 'Success');
+        return _reactNotifications.NotificationManager.success('Page saved successfully!', 'Success');
       }).catch(function (err) {
         return _reactNotifications.NotificationManager.error(err.response.data.Error.message, 'Error while saving.');
       });
@@ -66659,9 +66672,21 @@ var User = function (_React$Component) {
       });
     }
   }, {
+    key: 'toggleUserState',
+    value: function toggleUserState() {
+      var _this5 = this;
+
+      UserService.toggleUserState(this.state.selectedUser).then(function () {
+        _this5.fetchUsers.bind(_this5)();
+        _reactNotifications.NotificationManager.success('User state updated successfully!', 'Success');
+      }).catch(function () {
+        return _reactNotifications.NotificationManager.error('User state update failed!', 'Error while saving.');
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       return _react2.default.createElement(
         'div',
@@ -66704,7 +66729,12 @@ var User = function (_React$Component) {
                   _react2.default.createElement(
                     'th',
                     null,
-                    'isValidated'
+                    'Verified'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    null,
+                    'Active'
                   )
                 )
               ),
@@ -66715,7 +66745,7 @@ var User = function (_React$Component) {
                   return _react2.default.createElement(
                     'tr',
                     { key: index, onClick: function onClick() {
-                        return _this5.handleTableUserClick.bind(_this5)(user._id);
+                        return _this6.handleTableUserClick.bind(_this6)(user._id);
                       } },
                     _react2.default.createElement(
                       'td',
@@ -66740,7 +66770,12 @@ var User = function (_React$Component) {
                     _react2.default.createElement(
                       'td',
                       null,
-                      'false'
+                      user.isVerified ? '✅' : '🚫'
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      user.isActive ? '✅' : '🚫'
                     )
                   );
                 })
@@ -66762,7 +66797,7 @@ var User = function (_React$Component) {
                   value: this.state.selectedPages,
                   options: this.props.pageOptions,
                   onChange: function onChange(val) {
-                    return _this5.setState({ selectedPages: val });
+                    return _this6.setState({ selectedPages: val });
                   }
                 })
               ),
@@ -66770,6 +66805,11 @@ var User = function (_React$Component) {
                 _reactstrap.Button,
                 { onClick: this.updateUserData.bind(this) },
                 'Update'
+              ),
+              _react2.default.createElement(
+                _reactstrap.Button,
+                { color: 'danger', style: { marginLeft: '1em' }, onClick: this.toggleUserState.bind(this) },
+                'Toggle State'
               )
             ) : 'Select a user to assign pages.'
           )

@@ -20,6 +20,10 @@ class User extends React.Component {
   }
 
   componentDidMount() {
+    this.fetchUsers.bind(this)();
+  }
+
+  fetchUsers() {
     UserService.getAll()
       .then(users => this.setState({ users }));
   }
@@ -32,6 +36,7 @@ class User extends React.Component {
           newUserEmail: '',
         });
         NotificationManager.success('User saved successfully', 'Success');
+        this.fetchUsers.bind(this)();
       })
       .catch(console.error);
   }
@@ -44,7 +49,7 @@ class User extends React.Component {
 
   updateUserData() {
     UserService.updateAssignedPages(this.state.selectedUser, this.state.selectedPages)
-      .then(() => NotificationManager.success('Page saved successfully', 'Success'))
+      .then(() => NotificationManager.success('Page saved successfully!', 'Success'))
       .catch(err => NotificationManager.error(err.response.data.Error.message, 'Error while saving.'));
   }
 
@@ -54,6 +59,15 @@ class User extends React.Component {
         selectedPages: assignedPages,
         selectedUser: userId,
       }));
+  }
+
+  toggleUserState() {
+    UserService.toggleUserState(this.state.selectedUser)
+      .then(() => {
+        this.fetchUsers.bind(this)();
+        NotificationManager.success('User state updated successfully!', 'Success');
+      })
+      .catch(() => NotificationManager.error('User state update failed!', 'Error while saving.'));
   }
 
   render() {
@@ -68,7 +82,8 @@ class User extends React.Component {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Role</th>
-                  <th>isValidated</th>
+                  <th>Verified</th>
+                  <th>Active</th>
                 </tr>
               </thead>
               <tbody>
@@ -78,7 +93,8 @@ class User extends React.Component {
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <td>{user.isEditor ? 'Editor' : 'Admin'}</td>
-                    <td>false</td>
+                    <td>{user.isVerified ? '✅' : '🚫'}</td>
+                    <td>{user.isActive ? '✅' : '🚫'}</td>
                   </tr>)}
               </tbody>
             </Table>
@@ -96,6 +112,7 @@ class User extends React.Component {
                   />
                 </FormGroup>
                 <Button onClick={this.updateUserData.bind(this)}>Update</Button>
+                <Button color="danger" style={{ marginLeft: '1em' }} onClick={this.toggleUserState.bind(this)}>Toggle State</Button>
               </div>
               : 'Select a user to assign pages.'
             }

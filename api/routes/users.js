@@ -9,6 +9,8 @@ router.post('/signup', controller.signup);
 router.post('/forgotPassword', controller.forgotPassword);
 
 router.get('/logout', controller.logout);
+
+router.delete('/:id', controller.toggleUserState);
 router.get('/', controller.all);
 router.patch('/:id', controller.updateAssignedPages);
 

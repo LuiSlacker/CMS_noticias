@@ -20,6 +20,12 @@ export function logout() {
     .catch(console.error);
 }
 
+export function toggleUserState(userId) {
+  return axios.delete(`/api/users/${userId}`)
+    .catch(console.error);
+}
+
+
 export function createNewUser(username, email) {
   return axios.post('/api/users/create', { username, email })
     .then(response => response.data)

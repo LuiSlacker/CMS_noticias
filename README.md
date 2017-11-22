@@ -16,12 +16,12 @@ npm run build
 ```
 
 ## Development
-Please enable the editorconfig plugin within your IDE and try to obey as many es-lint rules as possible.
+Please enable the *editorconfig* plugin within your IDE and try to obey as many es-lint rules as possible.
 
 ## Deploy
 The app has been released to Heroku @ [https://agile-wave-55174.herokuapp.com](https://agile-wave-55174.herokuapp.com).
 
-The MongoDB-instance is hosted [mlab.com](https://mlab.com).
+The MongoDB-instance is hosted at [mlab.com](https://mlab.com).
 
 Ask for permission to deploy.
 

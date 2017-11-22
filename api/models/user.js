@@ -29,6 +29,11 @@ const UserModel = new Schema({
     required: true,
     default: false,
   },
+  isActive: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
   assignedPages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Pagina' }],
 }, {
   timestamps: true,
