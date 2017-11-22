@@ -57241,7 +57241,7 @@ var Home = function (_React$Component) {
       var _this2 = this;
 
       PagesService.getAll().then(function (pages) {
-        return Promise.all([pages, NoticeService.getAllForOnePage(pages[0]._id), _this2.fetchPoll.bind(_this2)(pages[0]._id)]);
+        return Promise.all([pages, NoticeService.getAllForOnePage(pages[5]._id), _this2.fetchPoll.bind(_this2)(pages[0]._id)]);
       }).then(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
             pages = _ref2[0],
@@ -57250,7 +57250,7 @@ var Home = function (_React$Component) {
         return _this2.setState({
           pages: pages,
           notices: notices,
-          activePage: pages[0]._id
+          activePage: pages[5]._id
         });
       });
     }

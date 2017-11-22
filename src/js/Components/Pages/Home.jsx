@@ -24,13 +24,13 @@ class Home extends React.Component {
     PagesService.getAll()
       .then(pages => Promise.all([
         pages,
-        NoticeService.getAllForOnePage(pages[0]._id),
+        NoticeService.getAllForOnePage(pages[5]._id),
         this.fetchPoll.bind(this)(pages[0]._id),
       ]))
       .then(([pages, notices]) => this.setState({
         pages,
         notices,
-        activePage: pages[0]._id,
+        activePage: pages[5]._id,
       }));
   }
 

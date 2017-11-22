@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const noticesRouter = express.Router({ mergeParams: true });
 const controller = require('../../../controllers/nested-notices');
