@@ -69,7 +69,7 @@ exports.create = (req, res, next) => {
         subject: 'Welcome to CMS-noticias',
         html: `<b>Hello ${user.username},</b><br /><br />
               Please verify your email address and set a password by following the link below.<br />
-              <a href="localhost:4001/signup?token=${token}">Verify ✔</a><br /><br /><br />
+              <a href="${process.env.SERVER_HOST}/signup?token=${token}">Verify ✔</a><br /><br /><br />
 
               Greetings<br />
               Your CMS-noticas TEAM`,

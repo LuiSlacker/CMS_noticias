@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config(); // import
 mongoose.Promise = require('bluebird');
 
 // Database connection
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${config.mongoDB.host}/${config.mongoDB.name}`, {
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}`, {
   useMongoClient: true,
   promiseLibrary: bluebird,
 });
