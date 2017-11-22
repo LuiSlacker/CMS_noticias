@@ -71978,7 +71978,7 @@ var NewPoll = function (_Component) {
 
       UserService.fetchAssignedPages(this.props.user._id).then(function (assignedPages) {
         return assignedPages.filter(function (page) {
-          return !_lodash2.default.isEmpty(page.poll.options);
+          return _lodash2.default.isEmpty(page.poll.options);
         });
       }).then(function (assignedPages) {
         return _this2.setState({

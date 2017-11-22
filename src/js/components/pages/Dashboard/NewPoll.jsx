@@ -21,7 +21,7 @@ class NewPoll extends Component {
 
   componentDidMount() {
     UserService.fetchAssignedPages(this.props.user._id)
-      .then(assignedPages => assignedPages.filter(page => !_.isEmpty(page.poll.options)))
+      .then(assignedPages => assignedPages.filter(page => _.isEmpty(page.poll.options)))
       .then(assignedPages => this.setState({
         pages: assignedPages,
         selectedPageId: assignedPages[0] ? assignedPages[0]._id : '',
