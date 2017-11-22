@@ -27,7 +27,6 @@
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
-    "express-session": "^1.15.6",
     "immutability-helper": "^2.5.0",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
@@ -37,9 +36,6 @@
     "morgan": "^1.9.0",
     "nodemailer": "^4.3.1",
     "nodemailer-smtp-transport": "^2.7.4",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^4.4.0",
     "path": "^0.12.7",
     "react-bootstrap": "^0.31.5",
     "react-meta-tags": "^0.3.0",
@@ -50,8 +46,7 @@
     "reactstrap": "^5.0.0-alpha.3",
     "webpack": "^3.8.1",
     "winston": "^2.4.0",
-    "winston-daily-rotate-file": "^1.7.2",
-    "winston-slack-hook": "^0.3.0"
+    "winston-daily-rotate-file": "^1.7.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

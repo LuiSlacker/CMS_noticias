@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
 import { Card, Button, CardHeader, CardBody, FormGroup, Label, Input } from 'reactstrap';
 import * as UserService from '../../services/user-service';
@@ -30,7 +30,16 @@ class Login extends React.Component {
       .then((data) => {
         NotificationManager.success('Logged in successfully!', 'Success');
         this.props.setUser(data.user);
-        localStorage.setItem('user_token', data.token);
+        this.props.history.push('/');
+      }).catch(() => NotificationManager.error('Login failed!', 'Error'));
+  }
+
+  handleForgotPasswordClick(evt) {
+    evt.preventDefault();
+    UserService.login(this.state.email, this.state.password)
+      .then((data) => {
+        NotificationManager.success('Logged in successfully!', 'Success');
+        this.props.setUser(data.user);
         this.props.history.push('/');
       }).catch(() => NotificationManager.error('Login failed!', 'Error'));
   }
@@ -62,6 +71,7 @@ class Login extends React.Component {
                   name="password"/>
               </FormGroup>
               <Button onClick={this.handleBtnClick}>Login</Button>
+              <Link to='/forgotPassword' style={{ marginLeft: '1em' }}>Forgot password</Link>
             </CardBody>
           </Card>
         </div>

@@ -13,6 +13,7 @@ import About from './pages/About.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Signup from './pages/Signup.jsx';
 import Login from './pages/Login.jsx';
+import ForgotPassword from './pages/ForgotPassword.jsx';
 
 class Main extends React.Component {
   constructor(props) {
@@ -49,6 +50,11 @@ class Main extends React.Component {
               path="/login"
               exact
               render= {props => <Login setUser={this.setUser.bind(this)} /> }
+            />
+            <Route
+              path="/forgotPassword"
+              exact
+              render= {props => <ForgotPassword setUser={this.setUser.bind(this)} /> }
             />
 
             <Route path="/admin" exact component={Admin}/>

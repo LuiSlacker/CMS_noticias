@@ -10,6 +10,11 @@ export function signup(password, token) {
     .then(response => response.data);
 }
 
+export function forgotPassword(email) {
+  return axios.post('/api/users/forgotPassword', { email })
+    .then(response => response.data);
+}
+
 export function logout() {
   return axios.get('/api/users/logout')
     .catch(console.error);

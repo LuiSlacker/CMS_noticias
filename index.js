@@ -46,9 +46,9 @@ app.use(express.static('./public'));
 // expose api
 app.use('/api', require('./api'));
 
-// app.get('*', (request, response) => {
-//   response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-// });
+app.get('*', (request, response) => {
+  response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
 
 // global errorHandler ============================================
 require('./errorHandler/ErrorHandler')(app);

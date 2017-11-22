@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const controller = require('../controllers/users');
-const passport = require('passport');
 
 router.param('id', controller.params);
-router.post('/login', controller.login); // , passport.authenticate('local')
+router.post('/login', controller.login);
 
 router.post('/create', controller.create);
 router.post('/signup', controller.signup);
+router.post('/forgotPassword', controller.forgotPassword);
 
 router.get('/logout', controller.logout);
 router.get('/', controller.all);

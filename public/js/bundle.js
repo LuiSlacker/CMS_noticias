@@ -11789,6 +11789,7 @@ module.exports = Object.keys || function keys(O) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (immutable) */ __webpack_exports__["login"] = login;
 /* harmony export (immutable) */ __webpack_exports__["signup"] = signup;
+/* harmony export (immutable) */ __webpack_exports__["forgotPassword"] = forgotPassword;
 /* harmony export (immutable) */ __webpack_exports__["logout"] = logout;
 /* harmony export (immutable) */ __webpack_exports__["createNewUser"] = createNewUser;
 /* harmony export (immutable) */ __webpack_exports__["getAll"] = getAll;
@@ -11807,6 +11808,11 @@ function login(email, password) {
 
 function signup(password, token) {
   return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/users/signup', { password, token })
+    .then(response => response.data);
+}
+
+function forgotPassword(email) {
+  return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/users/forgotPassword', { email })
     .then(response => response.data);
 }
 
@@ -32489,6 +32495,10 @@ var _Login = __webpack_require__(543);
 
 var _Login2 = _interopRequireDefault(_Login);
 
+var _ForgotPassword = __webpack_require__(548);
+
+var _ForgotPassword2 = _interopRequireDefault(_ForgotPassword);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32552,6 +32562,13 @@ var Main = function (_React$Component) {
                 exact: true,
                 render: function render(props) {
                   return _react2.default.createElement(_Login2.default, { setUser: _this2.setUser.bind(_this2) });
+                }
+              }),
+              _react2.default.createElement(_reactRouterDom.Route, {
+                path: '/forgotPassword',
+                exact: true,
+                render: function render(props) {
+                  return _react2.default.createElement(_ForgotPassword2.default, { setUser: _this2.setUser.bind(_this2) });
                 }
               }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', exact: true, component: _Admin2.default }),
@@ -89739,8 +89756,21 @@ var Login = function (_React$Component) {
       UserService.login(this.state.email, this.state.password).then(function (data) {
         _reactNotifications.NotificationManager.success('Logged in successfully!', 'Success');
         _this2.props.setUser(data.user);
-        localStorage.setItem('user_token', data.token);
         _this2.props.history.push('/');
+      }).catch(function () {
+        return _reactNotifications.NotificationManager.error('Login failed!', 'Error');
+      });
+    }
+  }, {
+    key: 'handleForgotPasswordClick',
+    value: function handleForgotPasswordClick(evt) {
+      var _this3 = this;
+
+      evt.preventDefault();
+      UserService.login(this.state.email, this.state.password).then(function (data) {
+        _reactNotifications.NotificationManager.success('Logged in successfully!', 'Success');
+        _this3.props.setUser(data.user);
+        _this3.props.history.push('/');
       }).catch(function () {
         return _reactNotifications.NotificationManager.error('Login failed!', 'Error');
       });
@@ -89800,6 +89830,11 @@ var Login = function (_React$Component) {
                 _reactstrap.Button,
                 { onClick: this.handleBtnClick },
                 'Login'
+              ),
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/forgotPassword', style: { marginLeft: '1em' } },
+                'Forgot password'
               )
             )
           )
@@ -89812,6 +89847,142 @@ var Login = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = (0, _reactRouterDom.withRouter)(Login);
+
+/***/ }),
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */,
+/* 548 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(5);
+
+var _reactNotifications = __webpack_require__(10);
+
+var _reactstrap = __webpack_require__(6);
+
+var _userService = __webpack_require__(39);
+
+var UserService = _interopRequireWildcard(_userService);
+
+var _meta = __webpack_require__(24);
+
+var _meta2 = _interopRequireDefault(_meta);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ForgotPassword = function (_React$Component) {
+  _inherits(ForgotPassword, _React$Component);
+
+  function ForgotPassword(props) {
+    _classCallCheck(this, ForgotPassword);
+
+    var _this = _possibleConstructorReturn(this, (ForgotPassword.__proto__ || Object.getPrototypeOf(ForgotPassword)).call(this, props));
+
+    _this.state = {
+      email: '',
+      password: ''
+    };
+
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleBtnClick = _this.handleBtnClick.bind(_this);
+    return _this;
+  }
+
+  _createClass(ForgotPassword, [{
+    key: 'handleChange',
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    }
+  }, {
+    key: 'handleBtnClick',
+    value: function handleBtnClick(evt) {
+      var _this2 = this;
+
+      evt.preventDefault();
+      UserService.forgotPassword(this.state.email).then(function () {
+        _reactNotifications.NotificationManager.success('Check your mails', 'Success');
+        _this2.props.history.push('/');
+      }).catch(function () {
+        return _reactNotifications.NotificationManager.error('Reset failed!', 'Error');
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'article',
+        null,
+        _react2.default.createElement(_meta2.default, null),
+        _react2.default.createElement(
+          'div',
+          { className: 'login-wrapper' },
+          _react2.default.createElement(
+            _reactstrap.Card,
+            null,
+            _react2.default.createElement(
+              _reactstrap.CardHeader,
+              null,
+              'Reset Password'
+            ),
+            _react2.default.createElement(
+              _reactstrap.CardBody,
+              null,
+              _react2.default.createElement(
+                _reactstrap.FormGroup,
+                null,
+                _react2.default.createElement(
+                  _reactstrap.Label,
+                  { 'for': 'username' },
+                  'Email'
+                ),
+                _react2.default.createElement(_reactstrap.Input, {
+                  type: 'email',
+                  value: this.state.email,
+                  onChange: this.handleChange,
+                  id: 'email',
+                  name: 'email' })
+              ),
+              _react2.default.createElement(
+                _reactstrap.Button,
+                { onClick: this.handleBtnClick },
+                'Request Email'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return ForgotPassword;
+}(_react2.default.Component);
+
+exports.default = (0, _reactRouterDom.withRouter)(ForgotPassword);
 
 /***/ })
 /******/ ]);
