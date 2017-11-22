@@ -1,17 +1,18 @@
-'use strict';
-
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bluebird = require('bluebird');
 const config = require('./config/config');
 const path = require('path');
-const passport = require('passport');
+// const passport = require('passport');
+const cookieParser = require('cookie-parser');
+
+if (process.env.NODE_ENV !== 'production') require('dotenv').config(); // import environment variables in dev mode
 
 mongoose.Promise = require('bluebird');
 
 // Database connection
-mongoose.connect(`mongodb://${config.mongoDB.username}:${config.mongoDB.password}@${config.mongoDB.host}/${config.mongoDB.name}`, {
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${config.mongoDB.host}/${config.mongoDB.name}`, {
   useMongoClient: true,
   promiseLibrary: bluebird,
 });
@@ -20,19 +21,20 @@ const compression = require('compression');
 
 // parse request body
 app.use(express.json());
+app.use(cookieParser());
 
-app.use(require('express-session')({
-  secret: config.session.secret,
-  resave: false,
-  saveUninitialized: false,
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(require('express-session')({
+//   secret: config.session.secret,
+//   resave: false,
+//   saveUninitialized: false,
+// }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-const User = require('./api/models/user');
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// const User = require('./api/models/user');
+// passport.use(User.createStrategy());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 const log = require('./lib/logger');
 

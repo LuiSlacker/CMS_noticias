@@ -22,17 +22,12 @@ class Header extends React.Component {
                 <Link className="nav-link" to='/dashboard'>Dashboard</Link>
               </li>
               }
-              {!this.props.user._id &&
+              {!this.props.user.email &&
               <li className="nav-item">
                 <Link className="nav-link" to='/login'>Login</Link>
               </li>
               }
-              {!this.props.user._id &&
-              <li className="nav-item">
-                <Link className="nav-link" to='/signup'>Signup</Link>
-              </li>
-              }
-              {this.props.user._id &&
+              {this.props.user.email &&
               <li className="nav-item">
                 <a className="nav-link" href='api/users/logout'>Logout</a>
               </li>

@@ -1,5 +1,3 @@
-'use strict';
-
 const log = require('../lib/logger');
 const Boom = require('boom');
 

@@ -12,11 +12,9 @@ const PaginaModel = new Schema({
   poll: {
     title: {
       type: String,
-      required: true,
     },
     question: {
       type: String,
-      required: true,
     },
     options: {
       type: [{
@@ -26,7 +24,6 @@ const PaginaModel = new Schema({
           default: 0,
         },
       }],
-      required: true,
     },
   },
   notices: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notice' }],

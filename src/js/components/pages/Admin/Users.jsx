@@ -26,7 +26,13 @@ class User extends React.Component {
 
   persistNewUser() {
     UserService.createNewUser(this.state.newUsername, this.state.newUserEmail)
-      .then()
+      .then(() => {
+        this.setState({
+          newUsername: '',
+          newUserEmail: '',
+        });
+        NotificationManager.success('User saved successfully', 'Success');
+      })
       .catch(console.error);
   }
 
@@ -38,8 +44,8 @@ class User extends React.Component {
 
   updateUserData() {
     UserService.updateAssignedPages(this.state.selectedUser, this.state.selectedPages)
-      .then(() => NotificationManager.success('Pagina guardado con éxito', 'Exito'))
-      .catch(err => NotificationManager.error(err.response.data.Error.message, 'Error al guardar'));
+      .then(() => NotificationManager.success('Page saved successfully', 'Success'))
+      .catch(err => NotificationManager.error(err.response.data.Error.message, 'Error while saving.'));
   }
 
   handleTableUserClick(userId) {

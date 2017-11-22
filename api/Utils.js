@@ -1,4 +1,6 @@
-'use strict';
+const Jwt = require('jsonwebtoken');
+const config = require('../config/config');
+const Boom = require('boom');
 
 module.exports = class Utils {
   /**
@@ -7,4 +9,24 @@ module.exports = class Utils {
   static isValidObjectId(id) {
     return id.match(/^[0-9a-fA-F]{24}$/);
   }
+
+  static isAuthenticated(req, res, next) {
+    const token = req.cookies.user_token;
+    Utils.verifyToken(token, (err, decoded) => {
+      if (err) return next(Boom.unauthorized('Not authorized'));
+      next();
+    });
+  }
+
+  static verifyToken(token, cb) {
+    Jwt.verify(
+      token,
+      config.jwt.privateKey,
+      (err, decoded) => {
+        if (err) return cb(new Error({ success: false, message: 'Failed to authenticate token.', err }), null);
+        cb(null, decoded);
+      }
+    );
+  }
 };
+

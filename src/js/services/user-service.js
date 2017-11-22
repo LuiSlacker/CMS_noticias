@@ -1,14 +1,13 @@
 import axios from 'axios';
 
-export function login(username, password) {
-  return axios.post('/api/users/login', { username, password })
+export function login(email, password) {
+  return axios.post('/api/users/login', { email, password })
     .then(response => response.data);
 }
 
-export function signup(username, password, email) {
-  return axios.post('/api/users/signup', { username, password, email })
-    .then(response => response.data)
-    .catch(console.error);
+export function signup(password, token) {
+  return axios.post('/api/users/signup', { password, token })
+    .then(response => response.data);
 }
 
 export function logout() {
@@ -43,6 +42,12 @@ export function fetchAssignedPageIds(userId) {
 
 export function fetchAssignedPages(userId) {
   return axios.get(`/api/users/${userId}/assignedPages`)
+    .then(response => response.data)
+    .catch(console.error);
+}
+
+export function getUserInfoForToken(token) {
+  return axios.get(`/api/users/userfortoken/${token}`)
     .then(response => response.data)
     .catch(console.error);
 }

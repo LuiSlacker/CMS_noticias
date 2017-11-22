@@ -12,6 +12,7 @@ const UserModel = new Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -25,6 +26,11 @@ const UserModel = new Schema({
     type: Boolean,
     required: true,
     default: true,
+  },
+  isVerified: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
   assignedPages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Pagina' }],
 }, {

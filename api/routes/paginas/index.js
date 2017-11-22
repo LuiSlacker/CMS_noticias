@@ -1,14 +1,12 @@
-'use strict';
-
 const express = require('express');
 const paginasRouter = express.Router({ mergeParams: true });
 const controller = require('../../controllers/paginas');
+const Utils = require('../../Utils');
 
 paginasRouter.param('id', controller.params);
 
-paginasRouter.route('/')
-  .get(controller.all)
-  .post(controller.post);
+paginasRouter.get('/', controller.all);
+paginasRouter.post('/', Utils.isAuthenticated, controller.post);
 
 paginasRouter.route('/:id')
   .get(controller.get)

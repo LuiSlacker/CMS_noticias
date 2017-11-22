@@ -10,3 +10,4 @@ public/js
 logs
 
 .DS_Store
+.env

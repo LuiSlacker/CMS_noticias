@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
-import { Card, Button, CardHeader, CardBody, FormGroup, Label, Input } from 'reactstrap';
+import { Card, Button, CardHeader, CardTitle, CardSubtitle, CardBody, FormGroup, Label, Input } from 'reactstrap';
 import MetaDefault from '../helper/meta.jsx';
 import * as UserService from '../../services/user-service';
 
@@ -13,10 +13,21 @@ class Signup extends React.Component {
       username: '',
       password: '',
       email: '',
+      token: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
+  }
+  componentDidMount() {
+    const parsedUrl = new URL(window.location.href);
+    const token = parsedUrl.searchParams.get('token');
+    UserService.getUserInfoForToken(token)
+      .then(user => this.setState({
+        username: user.username,
+        email: user.email,
+        token,
+      }));
   }
 
   handleChange(e) {
@@ -27,12 +38,12 @@ class Signup extends React.Component {
 
   handleSignup(evt) {
     evt.preventDefault();
-    UserService.signup(this.state.username, this.state.password, this.state.email)
+    UserService.signup(this.state.password, this.state.token)
       .then((user) => {
         this.props.setUser(user);
         this.props.history.push('/');
         NotificationManager.success('Signed up successfully.', 'Success');
-      }).catch(err => console.log(err));
+      }).catch(() => NotificationManager.error('Sign in failed!', 'Error'));
   }
 
   render() {
@@ -41,25 +52,18 @@ class Signup extends React.Component {
         <MetaDefault />
         <div className='signup-wrapper'>
           <Card>
-            <CardHeader>Signup</CardHeader>
+            <CardHeader>
+              <CardTitle>Signup</CardTitle>
+              <CardSubtitle>Please set up a password for the new account!</CardSubtitle>
+            </CardHeader>
             <CardBody>
               <FormGroup>
-                <Label for="username">Username</Label>
-                <Input
-                  type="text"
-                  value={this.state.username}
-                  onChange={this.handleChange}
-                  id="username"
-                  name="username"/>
+                <Label for="username">Username: </Label>
+                <strong>{this.state.username}</strong>
               </FormGroup>
               <FormGroup>
-                <Label for="email">Email</Label>
-                <Input
-                  type="text"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                  id="email"
-                  name="email"/>
+                <Label for="email">Email: </Label>
+                <strong>{this.state.email}</strong>
               </FormGroup>
               <FormGroup>
                 <Label for="password">Password</Label>

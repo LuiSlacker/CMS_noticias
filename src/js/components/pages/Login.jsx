@@ -10,7 +10,7 @@ class Login extends React.Component {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
     };
 
@@ -26,12 +26,13 @@ class Login extends React.Component {
 
   handleBtnClick(evt) {
     evt.preventDefault();
-    UserService.login(this.state.username, this.state.password)
-      .then((user) => {
+    UserService.login(this.state.email, this.state.password)
+      .then((data) => {
         NotificationManager.success('Logged in successfully!', 'Success');
-        this.props.setUser(user);
+        this.props.setUser(data.user);
+        localStorage.setItem('user_token', data.token);
         this.props.history.push('/');
-      }).catch(err => console.log(err));
+      }).catch(() => NotificationManager.error('Login failed!', 'Error'));
   }
 
   render() {
@@ -43,13 +44,13 @@ class Login extends React.Component {
             <CardHeader>Login</CardHeader>
             <CardBody>
               <FormGroup>
-                <Label for="username">Username</Label>
+                <Label for="username">Email</Label>
                 <Input
-                  type="text"
-                  value={this.state.username}
+                  type="email"
+                  value={this.state.email}
                   onChange={this.handleChange}
-                  id="username"
-                  name="username"/>
+                  id="email"
+                  name="email"/>
               </FormGroup>
               <FormGroup>
                 <Label for="password">Password</Label>

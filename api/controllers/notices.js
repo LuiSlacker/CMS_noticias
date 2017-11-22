@@ -1,5 +1,3 @@
-'use strict';
-
 const Boom = require('boom');
 const Utils = require('../Utils');
 
