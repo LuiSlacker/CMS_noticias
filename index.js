@@ -3,7 +3,6 @@ const app = express();
 const mongoose = require('mongoose');
 const bluebird = require('bluebird');
 const path = require('path');
-// const passport = require('passport');
 const cookieParser = require('cookie-parser');
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config(); // import environment variables in dev mode
