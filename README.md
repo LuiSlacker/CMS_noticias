@@ -131,10 +131,10 @@ Ask for permission to deploy.
 
 ## Team
 
-* Mateo Daza
-* Ludwig Goohsen
-* Sebastian Racedo
+* MateoDaza
+* LudwigGoohsen
+* SebastianRacedo
 
-[Mateo Daza]: <https://github.com/mateodaza>
-[Ludwig Goohsen]: <https://github.com/LuiSlacker>
-[Sebastian Racedo]: <https://github.com/JoaoRacedo>
+[MateoDaza]: <https://github.com/mateodaza>
+[LudwigGoohsen]: <https://github.com/LuiSlacker>
+[SebastianRacedo]: <https://github.com/JoaoRacedo>
